@@ -1,0 +1,25 @@
+.AppHeader {
+  margin: 0;
+}
+
+.navbar {
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+}
+
+.logo {
+  padding: 0 150px;
+  margin: 0;
+  text-align: center;
+}
