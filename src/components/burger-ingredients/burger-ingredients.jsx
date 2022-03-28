@@ -6,8 +6,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css'
 
-import bun1 from '../../images/bun-01.png'
-import bun2 from '../../images/bun-02.png'
+import data from '../../utils/data'
 
 
 function BurgerIngredients() {
@@ -15,48 +14,97 @@ function BurgerIngredients() {
 
   return (
     <main className={styles.main}>
-      <div style={{ display: 'flex' }}>
-        <Tab value="one" active={current === 'Булки'} onClick={setCurrent}>
-          One
+      
+      <p className="text text_type_main-large mt-10">
+        Соберите бургер
+      </p>
+
+      <div className='mt-5' style={{ display: 'flex' }}>
+        <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+          Булки
         </Tab>
-        <Tab value="two" active={current === 'Соусы'} onClick={setCurrent}>
-          Two
+        <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+          Соусы
         </Tab>
-        <Tab value="three" active={current === 'Начинки'} onClick={setCurrent}>
-          Three
+        <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+          Начинки
         </Tab>
       </div>
 
       <div className={styles.lists}>
-        <h2>Булки</h2>
+        <p className="text text_type_main-large mb-6 mt-10">
+          Булки
+        </p>
         <ul className={styles.list}>
-          <li className={styles.item}>
-            <Counter count={1} size="default" />
-            <img src={bun1} alt="" />
-            <div className={styles.priceContainer}>
-              <p className="text text_type_digits-default">20</p>
-              <CurrencyIcon type="primary" />
-            </div>
-            <p className="text text_type_main-default">
-              Краторная булка N-200i
-            </p>
-          </li>
-          <li className={styles.item}>
-            <Counter count={2} size="default" />
-            <img src={bun2} alt="" />
-            <div className={styles.priceContainer}>
-              <p className="text text_type_digits-default">20</p>
-              <CurrencyIcon type="primary" />
-            </div>
-            <p className="text text_type_main-default">
-              Флюоресцентная булка R2-D3
-            </p>
-          </li>
+          {data.map( el =>{
+            if (el.type == "bun"){
+              return (           
+                <li className={styles.item + " mt-6 ml-5"} onClick={console.log(1)}>
+                  <Counter count={1} size="default" />
+                  <img className='ml-4 mr-4' src={el.image} alt="" />
+                  <div className={styles.priceContainer + " mt-1 mb-1"}>
+                    <p className="text text_type_digits-default mr-2">{el.price}</p>
+                    <CurrencyIcon type="primary" />
+                  </div>
+                  <p className="text text_type_main-default">
+                    {el.name}
+                  </p>
+                </li>
+                )
+            }else {
+              return null
+            }
+          })}
         </ul>
 
-        <h2>Соусы</h2>
-        <ul className='list'>
-        
+        <p className="text text_type_main-large mb-6 mt-10">
+          Соусы
+        </p>
+        <ul className={styles.list}>
+          {data.map( el =>{
+            if (el.type == "sauce"){
+              return (           
+                <li className={styles.item + " mt-6 ml-5"}>
+                  <Counter count={1} size="default" />
+                  <img className='ml-4 mr-4' src={el.image} alt="" />
+                  <div className={styles.priceContainer  + " mt-1 mb-1"}>
+                    <p className="text text_type_digits-default mr-2">{el.price}</p>
+                    <CurrencyIcon type="primary" />
+                  </div>
+                  <p className="text text_type_main-default">
+                    {el.name}
+                  </p>
+                </li>
+                )
+            }else {
+              return null
+            }
+          })}
+        </ul>
+
+        <p className="text text_type_main-large mb-6 mt-10">
+          Начинки
+        </p>
+        <ul className={styles.list}>
+          {data.map( el =>{
+            if (el.type == "main"){
+              return (           
+                <li className={styles.item + " mt-6 ml-5"}>
+                  <Counter count={1} size="default" />
+                  <img className='ml-4 mr-4' src={el.image} alt="" />
+                  <div className={styles.priceContainer + " mt-1 mb-1"}>
+                    <p className="text text_type_digits-default mr-2">{el.price}</p>
+                    <CurrencyIcon type="primary" />
+                  </div>
+                  <p className="text text_type_main-default">
+                    {el.name}
+                  </p>
+                </li>
+                )
+            }else {
+              return null
+            }
+          })}
         </ul>
       </div>
     </main>

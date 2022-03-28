@@ -9,34 +9,32 @@ import styles from './app-header.module.css'
 
 function AppHeader() {
   return (
-    <header className={styles.AppHeader}>
+    <header className={styles.AppHeader + " mt-10"}>
       <nav className ={styles.navbar}>
         <ul className ={styles.menu}>
-          <li className = "m-5">
-            <div className={styles.item}>
+          <li className = {styles.constructor + " ml-5"}>
+            <div className={styles.item + " p-5 mt-4 mb-4"}>
               <BurgerIcon type="primary"/>
-              <p className="text text_type_main-small p-2">
+              <p className="text text_type_main-small ml-2">
                 Конструктор
               </p>
             </div>
           </li>
-          <li className ="m-5"> 
+          <li className ={styles.lenta + " ml-2 p-5 mt-4 mb-4"}> 
             <div className={styles.item}>
               <ListIcon type="secondary" />
-              <p className="text text_type_main-default text_color_inactive p-2">
+              <p className="text text_type_main-default text_color_inactive pl-2">
                 Лента заказов
               </p>
             </div>
           </li>
-          <li>
-            <div className ={styles.logo}>
+          <li className ={styles.logo}>
               <Logo />
-            </div>
           </li>
-          <li>
+          <li className ={styles.profile + " p-5 mt-4 mb-4"}>
             <div className={styles.item}>
               <ProfileIcon type="secondary" />
-              <p className="text text_type_main-default text_color_inactive p-2">
+              <p className="text text_type_main-default text_color_inactive pl-2">
                 Личный кабинет
               </p>
             </div>

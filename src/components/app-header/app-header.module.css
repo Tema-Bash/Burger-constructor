@@ -1,17 +1,22 @@
 .AppHeader {
-  margin: 0;
+  background: #1C1C21;
+  width: 100%;
 }
 
 .navbar {
+  max-width: 1240px;
+  margin: auto;
 }
 
 .menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   list-style-type: none;
   padding: 0;
   margin: 0;
+
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+  gap: 0px; 
+  grid-template-areas: "constructor lenta logo logo . profile"; 
 }
 
 .item {
@@ -19,7 +24,20 @@
 }
 
 .logo {
-  padding: 0 150px;
   margin: 0;
+  grid-area: logo;
   text-align: center;
+  align-self: center;
+}
+
+.constructor {
+  grid-area: constructor;
+}
+
+.lenta {
+  grid-area: lenta;
+}
+
+.profile {
+  grid-area: profile;
 }
