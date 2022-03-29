@@ -39,7 +39,7 @@ function BurgerIngredients() {
           {data.map( el =>{
             if (el.type == "bun"){
               return (           
-                <li className={styles.item + " mt-6 ml-5"} onClick={console.log(1)}>
+                <li className={styles.item + " mt-6 ml-5"} key={el._id}>
                   <Counter count={1} size="default" />
                   <img className='ml-4 mr-4' src={el.image} alt="" />
                   <div className={styles.priceContainer + " mt-1 mb-1"}>
@@ -64,7 +64,7 @@ function BurgerIngredients() {
           {data.map( el =>{
             if (el.type == "sauce"){
               return (           
-                <li className={styles.item + " mt-6 ml-5"}>
+                <li className={styles.item + " mt-6 ml-5"} key={el._id}>
                   <Counter count={1} size="default" />
                   <img className='ml-4 mr-4' src={el.image} alt="" />
                   <div className={styles.priceContainer  + " mt-1 mb-1"}>
@@ -89,7 +89,7 @@ function BurgerIngredients() {
           {data.map( el =>{
             if (el.type == "main"){
               return (           
-                <li className={styles.item + " mt-6 ml-5"}>
+                <li className={styles.item + " mt-6 ml-5"} key={el._id}>
                   <Counter count={1} size="default" />
                   <img className='ml-4 mr-4' src={el.image} alt="" />
                   <div className={styles.priceContainer + " mt-1 mb-1"}>

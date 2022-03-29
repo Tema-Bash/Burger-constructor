@@ -14,11 +14,10 @@ import bun2 from '../../images/bun-02.png';
 import data from '../../utils/data'
 
 function BurgerConstructor() {
-  
   return (
-    <div className={styles.burgerConstructor+ ' ml-10 mt-25'}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <div className='ml-6 mr-6'>
+    <div className='ml-10 mt-25'>
+      <div >
+          <div className='ml-6 mr-6 mb-4'>
             <ConstructorElement
               type="top"
               isLocked={true}
@@ -33,7 +32,7 @@ function BurgerConstructor() {
                 return null
               }else {
                 return (           
-                <li className={styles.item + " mb-4"}>
+                <li className={styles.item + " mb-4"} key={el._id}>
                   <DragIcon type="primary" />
                   <ConstructorElement
                     text={el.name}
@@ -44,7 +43,7 @@ function BurgerConstructor() {
               }
             })}
           </ul>
-          <div className='ml-6 mr-6'>
+          <div className='ml-6 mr-6 mt-4'>
             <ConstructorElement
               type="bottom"
               isLocked={true}
