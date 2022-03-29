@@ -41,3 +41,7 @@ main {
 .lists::-webkit-scrollbar-thumb {
   background-color: #8585AD;
 }
+
+.tab {
+  display: flex;
+}

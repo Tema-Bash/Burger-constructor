@@ -19,7 +19,7 @@ function BurgerIngredients() {
         Соберите бургер
       </p>
 
-      <div className='mt-5' style={{ display: 'flex' }}>
+      <div className={styles.tab + ' mt-5'}>
         <Tab value="one" active={current === 'one'} onClick={setCurrent}>
           Булки
         </Tab>
