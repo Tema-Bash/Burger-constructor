@@ -19,9 +19,6 @@ main {
   display: flex;
   flex-wrap: wrap;
   text-align: center;
-
-          max-width: 600px;
-
   list-style-type: none;
   padding: 0;
   margin: 0;

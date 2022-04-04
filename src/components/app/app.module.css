@@ -1,10 +1,10 @@
-.App{
-
-}
-
 .container {
   max-height: 1240px;
   max-width: 1240px;
   margin: 0 auto;
   display: flex;
+}
+
+.App {
+  position: relative;
 }

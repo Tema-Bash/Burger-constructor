@@ -1,0 +1,15 @@
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.title {
+  width: 640px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

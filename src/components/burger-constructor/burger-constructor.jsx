@@ -10,10 +10,7 @@ import styles from './burger-constructor.module.css'
 import bun1 from '../../images/bun-01.png';
 import bun2 from '../../images/bun-02.png';
 
-
-import data from '../../utils/data'
-
-function BurgerConstructor() {
+function BurgerConstructor(props) {
   return (
     <div className='ml-10 mt-25'>
       <div >
@@ -27,7 +24,7 @@ function BurgerConstructor() {
             />
           </div>
           <ul className={styles.list}>
-            {data.map( el =>{
+            {props.data.data && props.data.data.map( el =>{
               if (el.type == "bun"){
                 return null
               }else {
@@ -55,14 +52,14 @@ function BurgerConstructor() {
       </div>
       <div className={styles.buttonContainer +' mt-10'}>
         <p className="text text_type_main-large mr-2">
-          {data.reduce( (total, current) => {
+          {props.data.data && props.data.data.reduce( (total, current) => {
             return total + Number(current.price)
           },0)}
         </p>
         <div className='mr-10'>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={props.openModal}>
           Оформить заказ
         </Button>
       </div>
