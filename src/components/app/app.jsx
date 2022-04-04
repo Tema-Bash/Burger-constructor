@@ -8,24 +8,12 @@ import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
-/* Осталось сделать 
-+  есть проверка успешности выполнения запроса + цепочка обработки промисов завершается блоком catch
-
-  Для компонентов с пропсами описан propTypes . Если в качестве пропсов передается объект или массив
-  объектов, то в propTypes описана структура этого объекта.
-*/
-
 
 function App() {
   const [url, setUrl] = useState('https://norma.nomoreparties.space/api/ingredients');
   const [data, setData] = useState({});
 
   const [orderNumber, setOrderNumber] = useState(123456) //номер заказа
-
-
-  /*function getResponseData (res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-  };*/
 
   useEffect(() => {
     fetch(`${url}`).then(res => res.json()).then(res => setData(res)).catch(res => alert(`Ошибка обращения к серверу: ${res}`))
