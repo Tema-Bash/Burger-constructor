@@ -1,0 +1,47 @@
+main {
+  max-width: 600px;
+}
+
+.priceContainer {
+  display: flex;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  max-width: 271px;
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+
+          max-width: 600px;
+
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lists {
+  overflow-y: scroll;
+  max-height: 756px; 
+  min-height: 756px;
+}
+
+.lists::-webkit-scrollbar {
+  width: 8px;
+  background-color: #2F2F37;
+}
+
+.lists::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.tab {
+  display: flex;
+}
