@@ -1,9 +1,11 @@
 import {React, useState,useEffect } from 'react';
 import ReactDOM from 'react-dom'
+import styles from './modal.module.css'
+import PropTypes from 'prop-types';
+
 import { 
   CloseIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './modal.module.css'
 import ModalOverlay from '../modal-overlay/modal-overlay';
 
 const modalsContainer = document.querySelector('#modals');
@@ -32,4 +34,11 @@ export default function Modal({ title, onOverlayClick, onEscKeydown, children })
     </>,
     modalsContainer 
   );
+};
+
+Modal.propTypes = {
+  title: PropTypes.string.isRequired,
+  onOverlayClick: PropTypes.func.isRequired,
+  onEscKeydown: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
 };

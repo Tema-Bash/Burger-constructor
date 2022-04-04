@@ -4,12 +4,13 @@ import {
   Tab,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './burger-ingredients.module.css'
+import styles from './burger-ingredients.module.css';
+import PropTypes from 'prop-types';
 
 
 function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
-
+  const datalist = props.data.data;
   return (
     <main className={styles.main}>
       
@@ -34,7 +35,7 @@ function BurgerIngredients(props) {
           Булки
         </p>
         <ul className={styles.list}>
-          {props.data.data && props.data.data.map( el =>{
+          {datalist && datalist.map( el =>{
             if (el.type == "bun"){
               return (           
                 <li className={styles.item + " mt-6 ml-5"} key={el._id} onClick={() => props.setIngredientOpened(el._id)}>
@@ -59,7 +60,7 @@ function BurgerIngredients(props) {
           Соусы
         </p>
         <ul className={styles.list}>
-          {props.data.data && props.data.data.map( el =>{
+          {datalist && datalist.map( el =>{
             if (el.type == "sauce"){
               return (           
                 <li className={styles.item + " mt-6 ml-5"} key={el._id} onClick={() => props.setIngredientOpened(el._id)}>
@@ -84,7 +85,7 @@ function BurgerIngredients(props) {
           Начинки
         </p>
         <ul className={styles.list}>
-          {props.data.data && props.data.data.map( el =>{
+          {datalist && datalist.map( el =>{
             if (el.type == "main"){
               return (           
                 <li className={styles.item + " mt-6 ml-5"} key={el._id} onClick={() => props.setIngredientOpened(el._id)}>
@@ -107,6 +108,24 @@ function BurgerIngredients(props) {
       </div>
     </main>
   );
+}
+
+BurgerIngredients.propTypes = {
+  datalist: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['bun', 'main', 'sauce']),
+    proteins: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired,
+    calories: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    image_mobile: PropTypes.string.isRequired,
+    image_large: PropTypes.string.isRequired,
+    __v: PropTypes.number,
+  }),
+  setIngredientOpened: PropTypes.func.isRequired,
 }
 
 export default BurgerIngredients;

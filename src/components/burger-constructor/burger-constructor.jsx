@@ -5,12 +5,14 @@ import {
   DragIcon,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './burger-constructor.module.css'
+import styles from './burger-constructor.module.css';
+import PropTypes from 'prop-types';
 
 import bun1 from '../../images/bun-01.png';
 import bun2 from '../../images/bun-02.png';
 
 function BurgerConstructor(props) {
+  const datalist = props.data.data;
   return (
     <div className='ml-10 mt-25'>
       <div >
@@ -24,7 +26,7 @@ function BurgerConstructor(props) {
             />
           </div>
           <ul className={styles.list}>
-            {props.data.data && props.data.data.map( el =>{
+            {datalist && datalist.map( el =>{
               if (el.type == "bun"){
                 return null
               }else {
@@ -52,7 +54,7 @@ function BurgerConstructor(props) {
       </div>
       <div className={styles.buttonContainer +' mt-10'}>
         <p className="text text_type_main-large mr-2">
-          {props.data.data && props.data.data.reduce( (total, current) => {
+          {datalist && datalist.reduce( (total, current) => {
             return total + Number(current.price)
           },0)}
         </p>
@@ -65,6 +67,24 @@ function BurgerConstructor(props) {
       </div>
     </div>
   );
+}
+
+BurgerConstructor.propTypes = {
+  datalist: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['bun', 'main', 'sauce']),
+    proteins: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired,
+    calories: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    image_mobile: PropTypes.string.isRequired,
+    image_large: PropTypes.string.isRequired,
+    __v: PropTypes.number,
+  }),
+  openModal: PropTypes.func.isRequired,
 }
 
 export default BurgerConstructor;

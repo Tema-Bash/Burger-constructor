@@ -5,27 +5,35 @@ import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
-import OrderDetails from '../order-details/order-details'
-import IngredientDetails from '../ingredient-details/ingredient-details'
+import OrderDetails from '../order-details/order-details';
+import IngredientDetails from '../ingredient-details/ingredient-details';
+
+/* Осталось сделать 
++  есть проверка успешности выполнения запроса + цепочка обработки промисов завершается блоком catch
+
+  Для компонентов с пропсами описан propTypes . Если в качестве пропсов передается объект или массив
+  объектов, то в propTypes описана структура этого объекта.
+*/
+
 
 function App() {
   const [url, setUrl] = useState('https://norma.nomoreparties.space/api/ingredients');
   const [data, setData] = useState({});
 
-  const [orderNumber, setOrderNumber] = useState(456548) //номер заказа
+  const [orderNumber, setOrderNumber] = useState(123456) //номер заказа
 
 
-  function getResponseData (res) {
+  /*function getResponseData (res) {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-  };
+  };*/
 
   useEffect(() => {
-    fetch(`${url}`).then(res => getResponseData(res)).then((res) => setData(res))
+    fetch(`${url}`).then(res => res.json()).then(res => setData(res)).catch(res => alert(`Ошибка обращения к серверу: ${res}`))
   }, []);
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false); 
   const [ingredientDetailsOpened, setIngredientDetailsOpened] = useState(false);
-  const [ingredientIdOpened, setIngredientIdOpened] = useState(null);
+  const [ingredientIdOpened, setIngredientIdOpened] = useState(12);
 
   //откарываем модальное заказа и задаём id "кликнутого" элемента
   const setIngredientOpened = (id) => {
