@@ -1,13 +1,12 @@
 import {React, useState,useEffect } from 'react';
 import styles from './app.module.css';
+
 import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-
-import ModalOverlay from '../modal-overlay/modal-overlay'
 import Modal from '../modal/modal';
-
 import OrderDetails from '../order-details/order-details'
+import IngredientDetails from '../ingredient-details/ingredient-details'
 
 function App() {
   const [url, setUrl] = useState('https://norma.nomoreparties.space/api/ingredients');
@@ -24,17 +23,24 @@ function App() {
     fetch(`${url}`).then(res => getResponseData(res)).then((res) => setData(res))
   }, []);
 
-  const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false);
+  const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false); 
+  const [ingredientDetailsOpened, setIngredientDetailsOpened] = useState(false);
+  const [ingredientIdOpened, setIngredientIdOpened] = useState(null);
 
-  const openModal = () => {
-    setIsOrderDetailsOpened(true)
-    
+  //откарываем модальное заказа и задаём id "кликнутого" элемента
+  const setIngredientOpened = (id) => {
+    setIngredientDetailsOpened(true)
+    setIngredientIdOpened(id)
+  }
+  //открываем модальное заказа
+  const openTotalModal = () => {
+    setIsOrderDetailsOpened(true);
   }
 
   // Закрытие всех модалок
   const closeAllModals = () => {
     setIsOrderDetailsOpened(false);
-    // тут же закрываем и другие модалки
+    setIngredientDetailsOpened(false);
   };
 
   // Обработка нажатия Esc
@@ -46,17 +52,27 @@ function App() {
     <div className={styles.App}>
       {isOrderDetailsOpened &&
         <Modal
-          title="Детали заказа"
+          title=""
           onOverlayClick={closeAllModals}
           onEscKeydown={handleEscKeydown}
         >
           <OrderDetails  orderNumber={orderNumber}/>
         </Modal>
-     }
+      }
+      {ingredientDetailsOpened && 
+      <Modal
+        title="Детали ингредиента"
+        onOverlayClick={closeAllModals}
+        onEscKeydown={handleEscKeydown}
+      >
+        <IngredientDetails IngredientOpened={data.data.find( el => el._id == ingredientIdOpened )}/>
+      </Modal>
+      }
+
       <AppHeader />
       <section className={styles.container}>
-        <BurgerIngredients data={data} />
-        <BurgerConstructor data={data} openModal={openModal}/>
+        <BurgerIngredients data={data} setIngredientOpened={setIngredientOpened}/>
+        <BurgerConstructor data={data} openModal={openTotalModal}/>
       </section>
     </div>
   );

@@ -20,8 +20,10 @@ export default function Modal({ title, onOverlayClick, onEscKeydown, children })
   return ReactDOM.createPortal(
     <>
       <div className={styles.modal}>
-        <div className={styles.title}>
-          <h3>{title}</h3>
+        <div className={styles.title + ' mt-10 ml-10 mr-10'}>
+          <p className="text text_type_main-large">
+            {title}
+          </p>
           <CloseIcon type="primary" onClick={onOverlayClick}/>
         </div>
         {children}

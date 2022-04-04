@@ -5,7 +5,7 @@ import doneImage from '../../images/done.png';
 export default function OrderDetails({orderNumber}) {
   return (
     <div className={styles.orderDetails}>
-      <p className="text text_type_digits-large pt-30">{orderNumber}</p>
+      <p className="text text_type_digits-large pt-10">{orderNumber}</p>
       <p className="text text_type_main-small mt-8">
         Идентификатор заказа
       </p>
