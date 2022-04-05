@@ -1,12 +1,11 @@
 import React from 'react';
 import { 
-  Counter,
   Tab,
-  CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import PropTypes from 'prop-types';
-
+import { dataType } from '../../utils/types';
+import Ingredient from '../ingredient/ingredient'
 
 function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
@@ -37,19 +36,7 @@ function BurgerIngredients(props) {
         <ul className={styles.list}>
           {datalist && datalist.map( el =>{
             if (el.type == "bun"){
-              return (           
-                <li className={styles.item + " mt-6 ml-5"} key={el._id} onClick={() => props.setIngredientOpened(el._id)}>
-                  <Counter count={1} size="default"/>
-                  <img className='ml-4 mr-4' src={el.image} alt={el.name}/>
-                  <div className={styles.priceContainer + " mt-1 mb-1"}>
-                    <p className="text text_type_digits-default mr-2">{el.price}</p>
-                    <CurrencyIcon type="primary"/>
-                  </div>
-                  <p className="text text_type_main-default">
-                    {el.name}
-                  </p>
-                </li>
-                )
+              return (<Ingredient el={el} key={el._id} setIngredientOpened={props.setIngredientOpened}/>)
             }else {
               return null
             }
@@ -62,19 +49,7 @@ function BurgerIngredients(props) {
         <ul className={styles.list}>
           {datalist && datalist.map( el =>{
             if (el.type == "sauce"){
-              return (           
-                <li className={styles.item + " mt-6 ml-5"} key={el._id} onClick={() => props.setIngredientOpened(el._id)}>
-                  <Counter count={1} size="default" />
-                  <img className='ml-4 mr-4' src={el.image} alt="" />
-                  <div className={styles.priceContainer  + " mt-1 mb-1"}>
-                    <p className="text text_type_digits-default mr-2">{el.price}</p>
-                    <CurrencyIcon type="primary" />
-                  </div>
-                  <p className="text text_type_main-default">
-                    {el.name}
-                  </p>
-                </li>
-                )
+              return (<Ingredient el={el} key={el._id} setIngredientOpened={props.setIngredientOpened}/>)
             }else {
               return null
             }
@@ -87,19 +62,7 @@ function BurgerIngredients(props) {
         <ul className={styles.list}>
           {datalist && datalist.map( el =>{
             if (el.type == "main"){
-              return (           
-                <li className={styles.item + " mt-6 ml-5"} key={el._id} onClick={() => props.setIngredientOpened(el._id)}>
-                  <Counter count={1} size="default" />
-                  <img className='ml-4 mr-4' src={el.image} alt=""/>
-                  <div className={styles.priceContainer + " mt-1 mb-1"}>
-                    <p className="text text_type_digits-default mr-2">{el.price}</p>
-                    <CurrencyIcon type="primary" />
-                  </div>
-                  <p className="text text_type_main-default">
-                    {el.name}
-                  </p>
-                </li>
-                )
+              return (<Ingredient el={el} key={el._id} setIngredientOpened={props.setIngredientOpened}/>)
             }else {
               return null
             }
@@ -111,20 +74,7 @@ function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  datalist: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(['bun', 'main', 'sauce']),
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    calories: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    __v: PropTypes.number,
-  }),
+  datalist: dataType,
   setIngredientOpened: PropTypes.func.isRequired,
 }
 

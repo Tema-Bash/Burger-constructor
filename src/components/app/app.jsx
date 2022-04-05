@@ -16,7 +16,15 @@ function App() {
   const [orderNumber, setOrderNumber] = useState(123456) //номер заказа
 
   useEffect(() => {
-    fetch(`${url}`).then(res => res.json()).then(res => setData(res)).catch(res => alert(`Ошибка обращения к серверу: ${res}`))
+    fetch(`${url}`)
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка ${res.status}`);
+    })
+    .then(setData)
+    .catch((res) => alert(`Ошибка обращения к серверу: ${res}`));
   }, []);
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false); 
@@ -39,18 +47,12 @@ function App() {
     setIngredientDetailsOpened(false);
   };
 
-  // Обработка нажатия Esc
-  const handleEscKeydown = (e) => {
-    e.key === "Escape" && closeAllModals();
-  };
-
   return (
     <div className={styles.App}>
       {isOrderDetailsOpened &&
         <Modal
           title=""
-          onOverlayClick={closeAllModals}
-          onEscKeydown={handleEscKeydown}
+          onClose={closeAllModals}
         >
           <OrderDetails  orderNumber={orderNumber}/>
         </Modal>
@@ -58,8 +60,7 @@ function App() {
       {ingredientDetailsOpened && 
       <Modal
         title="Детали ингредиента"
-        onOverlayClick={closeAllModals}
-        onEscKeydown={handleEscKeydown}
+        onClose={closeAllModals}
       >
         <IngredientDetails IngredientOpened={data.data.find( el => el._id == ingredientIdOpened )}/>
       </Modal>

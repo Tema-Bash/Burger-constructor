@@ -10,12 +10,18 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 
 const modalsContainer = document.querySelector('#modals');
 
-export default function Modal({ title, onOverlayClick, onEscKeydown, children }) {
+export default function Modal({ title, onClose,  children }) {
+
+  // Обработка нажатия Esc
+  const handleEscKeydown = (e) => {
+    e.key === "Escape" && onClose();
+  };
+
   useEffect(() => {
-    document.addEventListener('keydown', onEscKeydown);
+    document.addEventListener('keydown', handleEscKeydown);
 
     return () => {
-      document.removeEventListener('keydown', onEscKeydown);
+      document.removeEventListener('keydown', handleEscKeydown);
     };
   }, []);
 
@@ -26,11 +32,11 @@ export default function Modal({ title, onOverlayClick, onEscKeydown, children })
           <p className="text text_type_main-large">
             {title}
           </p>
-          <CloseIcon type="primary" onClick={onOverlayClick}/>
+          <CloseIcon type="primary" onClick={onClose}/>
         </div>
         {children}
       </div>
-      <ModalOverlay onClick={onOverlayClick} />
+      <ModalOverlay onClick={onClose} />
     </>,
     modalsContainer 
   );
@@ -38,7 +44,6 @@ export default function Modal({ title, onOverlayClick, onEscKeydown, children })
 
 Modal.propTypes = {
   title: PropTypes.string.isRequired,
-  onOverlayClick: PropTypes.func.isRequired,
-  onEscKeydown: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
 };
