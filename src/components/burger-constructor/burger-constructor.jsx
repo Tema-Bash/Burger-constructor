@@ -5,15 +5,15 @@ import {
   DragIcon,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './burger-constructor.module.css'
+import styles from './burger-constructor.module.css';
+import PropTypes from 'prop-types';
+import { dataType } from '../../utils/types';
 
 import bun1 from '../../images/bun-01.png';
 import bun2 from '../../images/bun-02.png';
 
-
-import data from '../../utils/data'
-
-function BurgerConstructor() {
+function BurgerConstructor(props) {
+  const datalist = props.data.data;
   return (
     <div className='ml-10 mt-25'>
       <div >
@@ -27,7 +27,7 @@ function BurgerConstructor() {
             />
           </div>
           <ul className={styles.list}>
-            {data.map( el =>{
+            {datalist && datalist.map( el =>{
               if (el.type == "bun"){
                 return null
               }else {
@@ -55,19 +55,24 @@ function BurgerConstructor() {
       </div>
       <div className={styles.buttonContainer +' mt-10'}>
         <p className="text text_type_main-large mr-2">
-          {data.reduce( (total, current) => {
+          {datalist && datalist.reduce( (total, current) => {
             return total + Number(current.price)
           },0)}
         </p>
         <div className='mr-10'>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={props.openModal}>
           Оформить заказ
         </Button>
       </div>
     </div>
   );
+}
+
+BurgerConstructor.propTypes = {
+  datalist: dataType,
+  openModal: PropTypes.func.isRequired,
 }
 
 export default BurgerConstructor;

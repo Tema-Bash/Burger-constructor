@@ -1,0 +1,10 @@
+.orderDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.doneImage{
+  width: 120px;
+  height: 120px;
+}

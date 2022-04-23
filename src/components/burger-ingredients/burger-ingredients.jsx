@@ -1,17 +1,15 @@
 import React from 'react';
 import { 
-  Counter,
   Tab,
-  CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './burger-ingredients.module.css'
+import styles from './burger-ingredients.module.css';
+import PropTypes from 'prop-types';
+import { dataType } from '../../utils/types';
+import Ingredient from '../ingredient/ingredient'
 
-import data from '../../utils/data'
-
-
-function BurgerIngredients() {
+function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
-
+  const datalist = props.data.data;
   return (
     <main className={styles.main}>
       
@@ -36,21 +34,9 @@ function BurgerIngredients() {
           Булки
         </p>
         <ul className={styles.list}>
-          {data.map( el =>{
+          {datalist && datalist.map( el =>{
             if (el.type == "bun"){
-              return (           
-                <li className={styles.item + " mt-6 ml-5"} key={el._id}>
-                  <Counter count={1} size="default" />
-                  <img className='ml-4 mr-4' src={el.image} alt="" />
-                  <div className={styles.priceContainer + " mt-1 mb-1"}>
-                    <p className="text text_type_digits-default mr-2">{el.price}</p>
-                    <CurrencyIcon type="primary" />
-                  </div>
-                  <p className="text text_type_main-default">
-                    {el.name}
-                  </p>
-                </li>
-                )
+              return (<Ingredient el={el} key={el._id} setIngredientOpened={props.setIngredientOpened}/>)
             }else {
               return null
             }
@@ -61,21 +47,9 @@ function BurgerIngredients() {
           Соусы
         </p>
         <ul className={styles.list}>
-          {data.map( el =>{
+          {datalist && datalist.map( el =>{
             if (el.type == "sauce"){
-              return (           
-                <li className={styles.item + " mt-6 ml-5"} key={el._id}>
-                  <Counter count={1} size="default" />
-                  <img className='ml-4 mr-4' src={el.image} alt="" />
-                  <div className={styles.priceContainer  + " mt-1 mb-1"}>
-                    <p className="text text_type_digits-default mr-2">{el.price}</p>
-                    <CurrencyIcon type="primary" />
-                  </div>
-                  <p className="text text_type_main-default">
-                    {el.name}
-                  </p>
-                </li>
-                )
+              return (<Ingredient el={el} key={el._id} setIngredientOpened={props.setIngredientOpened}/>)
             }else {
               return null
             }
@@ -86,21 +60,9 @@ function BurgerIngredients() {
           Начинки
         </p>
         <ul className={styles.list}>
-          {data.map( el =>{
+          {datalist && datalist.map( el =>{
             if (el.type == "main"){
-              return (           
-                <li className={styles.item + " mt-6 ml-5"} key={el._id}>
-                  <Counter count={1} size="default" />
-                  <img className='ml-4 mr-4' src={el.image} alt="" />
-                  <div className={styles.priceContainer + " mt-1 mb-1"}>
-                    <p className="text text_type_digits-default mr-2">{el.price}</p>
-                    <CurrencyIcon type="primary" />
-                  </div>
-                  <p className="text text_type_main-default">
-                    {el.name}
-                  </p>
-                </li>
-                )
+              return (<Ingredient el={el} key={el._id} setIngredientOpened={props.setIngredientOpened}/>)
             }else {
               return null
             }
@@ -109,6 +71,11 @@ function BurgerIngredients() {
       </div>
     </main>
   );
+}
+
+BurgerIngredients.propTypes = {
+  datalist: dataType,
+  setIngredientOpened: PropTypes.func.isRequired,
 }
 
 export default BurgerIngredients;

@@ -1,0 +1,22 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: #1C1C21;
+  max-width: 720px;
+  max-height: 720px;
+  width: 100%;
+  border-radius: 40px;
+}
+
+.title {
+  max-width: 640px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
