@@ -1,15 +1,16 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { 
   Tab,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import PropTypes from 'prop-types';
 import { dataType } from '../../utils/types';
-import Ingredient from '../ingredient/ingredient'
+import Ingredient from '../ingredient/ingredient';
+import BurgerIngredientsContext from "../../context/burger-ingredients-context";
 
 function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
-  const datalist = props.data.data;
+  const datalist = useContext(BurgerIngredientsContext).data;
   return (
     <main className={styles.main}>
       

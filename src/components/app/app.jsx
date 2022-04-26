@@ -1,4 +1,4 @@
-import {React, useState,useEffect } from 'react';
+import {React, useState, useEffect, useContext, createContext } from 'react';
 import styles from './app.module.css';
 
 import AppHeader from '../app-header/app-header'
@@ -8,12 +8,14 @@ import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
+import BurgerIngredientsContext from "../../context/burger-ingredients-context";
 
 function App() {
   const [url, setUrl] = useState('https://norma.nomoreparties.space/api/ingredients');
   const [data, setData] = useState({});
 
   const [orderNumber, setOrderNumber] = useState(123456) //номер заказа
+
 
   useEffect(() => {
     fetch(`${url}`)
@@ -68,8 +70,10 @@ function App() {
 
       <AppHeader />
       <section className={styles.container}>
-        <BurgerIngredients data={data} setIngredientOpened={setIngredientOpened}/>
-        <BurgerConstructor data={data} openModal={openTotalModal}/>
+        <BurgerIngredientsContext.Provider value={data}>
+          <BurgerIngredients data={data} setIngredientOpened={setIngredientOpened}/>
+          <BurgerConstructor setOrderNumber={setOrderNumber} openModal={openTotalModal}/>
+        </BurgerIngredientsContext.Provider>
       </section>
     </div>
   );
