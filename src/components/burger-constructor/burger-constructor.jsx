@@ -10,6 +10,8 @@ import styles from './burger-constructor.module.css';
 
 import PropTypes from 'prop-types';
 import { dataType } from '../../utils/types';
+import {URL} from '../../utils/consts'
+import {checkResponse} from '../../utils/utils'
 
 import BurgerIngredientsContext from "../../context/burger-ingredients-context";
 
@@ -22,24 +24,20 @@ function BurgerConstructor({setOrderNumber, openModal}) {
 
   const handleOrderClick = () => {
     const ingredients = datalist.map((element)=>{return element._id});
-    const orderURL = 'https://norma.nomoreparties.space/api/orders';
 
     const saveOrder = (ingredients) => {
-      return fetch(`${orderURL}`,{
+      return fetch(`${URL}/orders`,{
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           ingredients: ingredients,
         }),
       })
-      .then((res) => {
-        if (res.ok) {
-          openModal()
-          return res.json();
-        }
-        return Promise.reject(`Ошибка ${res.status}`);
+      .then(checkResponse)
+      .then(res => {
+        setOrderNumber(res.order.number);
+        openModal();
       })
-      .then(res => setOrderNumber(res.order.number))
       .catch((res) => alert(`Ошибка обращения к серверу: ${res}`));
     }
     saveOrder(ingredients) // сохраняем ингредиенты на сервер
