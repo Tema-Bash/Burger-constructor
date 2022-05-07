@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-//import { dataType } from '../../utils/types';
+
 export const dataType = PropTypes.shape({
   _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

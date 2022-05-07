@@ -16,10 +16,7 @@
   background-color: #8585AD;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-}
+
 
 .buttonContainer {
   display: flex;
