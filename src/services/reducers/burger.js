@@ -5,7 +5,6 @@ import {
   } from '../actions/burger';
 import {initialBurger} from '../../utils/consts';
 
-//Начальный предложенный бургер
 const initialState = {
   burgerStructure: initialBurger,
 };
@@ -17,7 +16,10 @@ export const burgerReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_INGREDIENT:
       if (ingredient.type === 'bun') {
-        burgerStructure[0] = ingredient;
+        //чтобы добавление булки не перезаписывало добавленный первым игредиент:
+        if(burgerStructure.some((elem) => {return elem?.type == 'bun' })){//есть ли булка в собранном бургере?
+          burgerStructure[0] = ingredient;
+        } else burgerStructure.unshift(ingredient)
       } else {
         burgerStructure.push(ingredient);
       }
@@ -27,7 +29,7 @@ export const burgerReducer = (state = initialState, action) => {
       };
 
     case REMOVE_INGREDIENT:
-      burgerStructure = burgerStructure.filter((item) => item.Id !== ingredient.Id);
+      burgerStructure = burgerStructure.filter((item) => item.uuid !== ingredient.uuid);
       return {
         ...state,
         burgerStructure,

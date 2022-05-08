@@ -1,6 +1,6 @@
 import styles from './ingredient-details.module.css'
-import { dataType } from '../../utils/types';
 import { useSelector } from 'react-redux';
+
 export default function IngredientDetails() {
   const { selectedIngredient } = useSelector((store) => store.ingredients);
   return (
@@ -27,8 +27,4 @@ export default function IngredientDetails() {
       </ul>
     </div>
   )
-}
-
-IngredientDetails.propTypes = {
-  selectedIngredient: dataType,
 }

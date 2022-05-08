@@ -1,12 +1,14 @@
 import {useRef} from "react";
 import {useDispatch} from "react-redux";
 import {useDrag, useDrop} from "react-dnd";
+import PropTypes from 'prop-types';
 import {  REMOVE_INGREDIENT, SORT_INGREDIENTS } from '../../services/actions/burger';
 import { 
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../burger-constructor-ingredient/burger-constructor-ingredient.module.css';
+import {dataType} from '../../utils/types'
 
 function BurgerConstructorIngredient({el, i}) {
   const dispatch = useDispatch()
@@ -34,7 +36,6 @@ function BurgerConstructorIngredient({el, i}) {
       isHover: monitor.isOver()
     }),
     drop(dragIngredient) {
-      console.log(dragIngredient)
       if (dragIngredient.i === i) {
         return
       }
@@ -58,6 +59,9 @@ function BurgerConstructorIngredient({el, i}) {
   )
 }
 
-
+BurgerConstructorIngredient.prototypes = {
+  el: dataType.isRequired,
+  i: PropTypes.number.isRequired,
+}
 
 export default BurgerConstructorIngredient

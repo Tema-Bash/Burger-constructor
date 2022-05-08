@@ -5,6 +5,11 @@
   max-height: 484px;
   min-height: 484px;
   overflow-y: scroll;
+
+  display: flex;
+  max-width: 570px;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
 .list::-webkit-scrollbar {
@@ -16,7 +21,12 @@
   background-color: #8585AD;
 }
 
-
+.section {
+  max-width: 570px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 
 .buttonContainer {
   display: flex;
@@ -26,4 +36,22 @@
 
 .bun {
   margin-left: 25px;
+}
+
+.disableButton {
+  width: 215px;
+  max-height: 64px;
+  background-color: #3A3A55;
+  border-radius: 64px;
+  color: #8585AD;
+  padding: 20px 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.bunText {
+  min-height: 80px;
 }

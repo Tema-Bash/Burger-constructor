@@ -2,7 +2,6 @@ import React from 'react';
 import { useRef } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
-import { dataType } from '../../utils/types';
 import Ingredient from '../ingredient/ingredient';
 import { useSelector } from 'react-redux';
 
@@ -96,10 +95,6 @@ function BurgerIngredients() {
       </div>
     </main>
   );
-}
-
-BurgerIngredients.propTypes = {
-  ingredients: dataType,
 }
 
 export default BurgerIngredients;

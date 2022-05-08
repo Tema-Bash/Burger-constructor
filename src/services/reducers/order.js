@@ -6,7 +6,7 @@ import {
 } from '../actions/order';
 
 const initialState = {
-  orderNumber: undefined,//заменить на null
+  orderNumber: undefined,
   orderRequested: false,
   orderFailed: false,
 };

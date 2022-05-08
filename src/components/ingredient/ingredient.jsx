@@ -44,5 +44,5 @@ export default function Ingredient({el}) {
 }
 
 Ingredient.propTypes = {
-  el: dataType,
+  el: dataType.isRequired,
 }
