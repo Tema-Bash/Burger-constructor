@@ -1,7 +1,5 @@
-import {React, useState,useEffect } from 'react';
 import styles from './order-details.module.css';
 import PropTypes from 'prop-types';
-
 import doneImage from '../../images/done.png';
 
 export default function OrderDetails({orderNumber}) {
