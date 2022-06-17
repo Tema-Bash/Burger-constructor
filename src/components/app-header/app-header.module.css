@@ -1,5 +1,5 @@
 .AppHeader {
-  background: #1C1C21;
+  background: #1c1c21;
   width: 100%;
 }
 
@@ -13,14 +13,19 @@
   padding: 0;
   margin: 0;
 
-  display: grid; 
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
-  gap: 0px; 
-  grid-template-areas: "constructor lenta logo logo . profile"; 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px;
+  grid-template-areas: "constructor lenta logo logo . profile";
 }
 
 .item {
   display: flex;
+  text-decoration: none;
+}
+
+.linkActive {
+  color: #f2f2f3;
 }
 
 .logo {

@@ -6,7 +6,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  background-color: #1C1C21;
+  background-color: #1c1c21;
   max-width: 720px;
   max-height: 720px;
   width: 100%;
@@ -19,4 +19,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.title svg:hover {
+  cursor: pointer;
 }

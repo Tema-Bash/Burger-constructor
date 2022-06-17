@@ -1,0 +1,48 @@
+.container {
+  max-height: 1240px;
+  max-width: 1240px;
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: 1fr 480px 1fr;
+  gap: 60px;
+  margin-top: 180px;
+}
+
+.App {
+  position: relative;
+}
+
+.navList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  width: 320px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.inputContainer {
+  display: flex;
+}
+
+.inputContainer div:not(input + div) {
+  width: 100%;
+}
+
+.linkActive {
+  color: #f2f2f3;
+}
+
+.item {
+  display: flex;
+  text-decoration: none;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}

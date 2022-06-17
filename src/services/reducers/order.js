@@ -1,9 +1,9 @@
-import { 
+import {
   CLEAR_ORDER_NUMBER,
-  ORDER_REQUEST, 
+  ORDER_REQUEST,
   ORDER_SUCCESS,
-  ORDER_FAILED 
-} from '../actions/order';
+  ORDER_FAILED,
+} from "../actions/order";
 
 const initialState = {
   orderNumber: undefined,
