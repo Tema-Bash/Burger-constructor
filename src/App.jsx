@@ -23,9 +23,6 @@ export default function App() {
 
   //Посещал ли пользователь первый этап восстановления пароля
   const [visitForgotPass, setVisitForgotPass] = useState(false);
-  const { ingredients, selectedIngredient } = useSelector(
-    (store) => store.ingredients
-  );
 
   const closeAllModals = () => {
     dispatch({ type: CLEAR_ORDER_NUMBER });

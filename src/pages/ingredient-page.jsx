@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./ingredient-page.module.css";
-import {
-  Link,
-  useRouteMatch,
-  useParams,
-  Redirect,
-  useNavigate,
-} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getIngredients } from "../services/actions/ingredients";
 
 export const IngredientPage = () => {
@@ -20,7 +14,7 @@ export const IngredientPage = () => {
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);
-  // 60d3b41abdacab0026a733cd
+
   useEffect(() => {
     if (ingredients.length > 0) {
       const ingredient = ingredients.find((el) => el._id === params.id);

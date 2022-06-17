@@ -1,5 +1,3 @@
-import React, { useState, useCallback } from "react";
-
 import styles from "./login.module.css";
 import {} from "@ya.praktikum/react-developer-burger-ui-components";
 

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
 import styles from "./registration.module.css";
 import { Link } from "react-router-dom";
 import {
@@ -7,7 +7,7 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { registerRequest } from "../services/actions/authorization.js";
 
 export function RegistrationPage() {

@@ -1,5 +1,4 @@
 import { useState, useCallback } from "react";
-
 import styles from "./registration.module.css";
 import { Navigate, Link } from "react-router-dom";
 import {

@@ -1,18 +1,10 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import styles from "./profile.module.css";
 import { NavLink, useLocation } from "react-router-dom";
-import {
-  Button,
-  Input,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
-import { getCookie } from "../utils/utils";
-import { Navigate, useNavigate } from "react-router-dom";
-import {
-  exitRequest,
-  profileRequest,
-  updateRequest,
-} from "../services/actions/authorization.js";
+
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { exitRequest } from "../services/actions/authorization.js";
 import ProfileForm from "../components/change-profile-form/change-profile-form";
 import OrderHistory from "../components/order-history/order-history";
 

@@ -1,6 +1,6 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import styles from "./login.module.css";
-import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   PasswordInput,
   Button,
@@ -8,7 +8,6 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 import { authorization } from "../services/actions/authorization.js";
-import { getCookie } from "../utils/utils";
 
 export function LoginPage() {
   const { user } = useSelector((store) => store.auth);

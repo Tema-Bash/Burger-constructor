@@ -1,6 +1,5 @@
 import styles from "./change-profile-form.module.css";
-import React, { useState, useCallback, useEffect } from "react";
-import { NavLink, useLocation, Navigate, useNavigate } from "react-router-dom";
+import { useState, useCallback } from "react";
 import {
   Button,
   Input,
@@ -13,10 +12,6 @@ import {
 } from "../../services/actions/authorization.js";
 
 function ProfileForm() {
-  const { pathname } = useLocation();
-  const location = useLocation();
-  const navigate = useNavigate();
-
   const { user } = useSelector((store) => store.auth);
   // Состояние, в котором содержится значения полей ввода
   const [form, setValue] = useState({
@@ -39,6 +34,7 @@ function ProfileForm() {
     dispatch(profileRequest(getCookie("accessToken")));
     setValue({ ...form, name: user.name, login: user.email, password: "" });
   }, []);
+
   let saveProfile = useCallback(
     async (e) => {
       e.preventDefault();
@@ -50,7 +46,6 @@ function ProfileForm() {
           form.password
         )
       );
-
       setValue({ ...form, name: user.name, login: user.email });
     },
     [form]
