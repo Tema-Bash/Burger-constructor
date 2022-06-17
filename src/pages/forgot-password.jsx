@@ -9,7 +9,6 @@ import {
 import { forgotPass } from "../services/api";
 
 export function ForgotPasswordPage({ setVisitForgotPass }) {
-  setVisitForgotPass(true);
   // Состояние, в котором содержится значения полей ввода
   const [form, setValue] = useState({ name: "", email: "", password: "" });
   // Обработчик изменения полей ввода обновляет состояние
@@ -20,6 +19,7 @@ export function ForgotPasswordPage({ setVisitForgotPass }) {
   let resetHandler = useCallback(
     (e) => {
       e.preventDefault();
+      setVisitForgotPass(true);
 
       forgotPass(form.email)
         .then((res) => {

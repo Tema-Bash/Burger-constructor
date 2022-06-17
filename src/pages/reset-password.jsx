@@ -36,7 +36,7 @@ export function ResetPasswordPage({ visitForgotPass }) {
   );
 
   if (!visitForgotPass) {
-    <Navigate to="/forgot-password" replace={true} />;
+    return <Navigate to="/forgot-password" replace={true} />;
   }
 
   return (
