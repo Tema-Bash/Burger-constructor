@@ -33,22 +33,28 @@ export function ProfilePage() {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  let getProfile = useEffect(() => {
+  let cancelHandler = useCallback(async (e) => {
+    e.preventDefault();
     dispatch(profileRequest(getCookie("accessToken")));
-    setValue({ ...form, name: user.name, login: user.email });
+    setValue({ ...form, name: user.name, login: user.email, password: "" });
   }, []);
 
-  let saveProfile = useCallback((e) => {
-    e.preventDefault();
-    dispatch(
-      updateRequest(
-        getCookie("accessToken"),
-        form.login,
-        form.name,
-        form.password
-      )
-    );
-  }, []);
+  let saveProfile = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await dispatch(
+        updateRequest(
+          getCookie("accessToken"),
+          form.login,
+          form.name,
+          form.password
+        )
+      );
+
+      setValue({ ...form, name: user.name, login: user.email });
+    },
+    [form]
+  );
 
   const navigate = useNavigate();
   let logOut = useCallback(async () => {
@@ -160,7 +166,7 @@ export function ProfilePage() {
           </div>
           {rule && (
             <div className={styles.buttons}>
-              <Button onClick={getProfile} type="secoundary" size="medium">
+              <Button onClick={cancelHandler} type="secoundary" size="medium">
                 Отмена
               </Button>
               <Button onClick={saveProfile} type="primary" size="medium">

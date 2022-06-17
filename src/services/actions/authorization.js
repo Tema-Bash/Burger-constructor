@@ -30,12 +30,12 @@ export const SAVE_PROFILE_FAILED = "SAVE_PROFILE_FAILED";
 
 //Все экшены взаимодействуют с объектом User
 export const profileRequest = (accessTokenValue) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: "PROFILE_REQUEST",
     });
 
-    getUser(accessTokenValue)
+    await getUser(accessTokenValue)
       .then((res) => {
         if (res && res.success) {
           dispatch({
@@ -58,12 +58,12 @@ export const profileRequest = (accessTokenValue) => {
 };
 
 export const updateRequest = (accessTokenValue, email, name, password) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: "SAVE_PROFILE_REQUEST",
     });
 
-    updateUser(accessTokenValue, email, name, password)
+    await updateUser(accessTokenValue, email, name, password)
       .then((res) => {
         if (res && res.success) {
           dispatch({
