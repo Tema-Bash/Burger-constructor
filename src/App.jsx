@@ -35,6 +35,7 @@ export default function App() {
 
   const location = useLocation();
   const background = location.state?.background;
+
   return (
     <>
       <AppHeader />
@@ -55,14 +56,7 @@ export default function App() {
             ></Route>
           </>
         )}
-        <Route
-          path="/login"
-          element={
-            <ProtectedRoute anonymous={true}>
-              <LoginPage />
-            </ProtectedRoute>
-          }
-        ></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
         <Route
           path="/register"
           element={
@@ -88,7 +82,7 @@ export default function App() {
           }
         ></Route>
         <Route
-          path="/profile"
+          path="/profile/*"
           element={
             <ProtectedRoute anonymous={false}>
               <ProfilePage />

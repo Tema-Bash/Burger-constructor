@@ -1,18 +1,21 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import styles from "./login.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
 import {
   PasswordInput,
   Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { authorization } from "../services/actions/authorization.js";
+import { getCookie } from "../utils/utils";
 
 export function LoginPage() {
+  const { user } = useSelector((store) => store.auth);
+  const isAuth = Object.keys(user).length !== 0;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const location = useLocation();
   // Состояние, в котором содержится значения полей ввода
   const [form, setValue] = useState({ email: "", password: "" });
 
@@ -21,19 +24,21 @@ export function LoginPage() {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  let login = useCallback(
-    (e) => {
-      e.preventDefault();
-      dispatch(authorization(form.email, form.password));
-      navigate("/");
-    },
-    [form]
-  );
+  function onSubmit(e) {
+    e.preventDefault();
+    dispatch(authorization(form.email, form.password));
+  }
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate(location.state?.from || "/");
+    }
+  }, [isAuth, navigate, location]);
 
   return (
     <div className={styles.App}>
       <section className={styles.container}>
-        <form className={styles.form}>
+        <form onSubmit={onSubmit} className={styles.form}>
           <p className="text text_type_main-medium mb-6">Вход</p>
           <div className={styles.inputContainer + " mb-6"}>
             <Input
@@ -58,7 +63,7 @@ export function LoginPage() {
               size={"default"}
             />
           </div>
-          <Button onClick={login} type="primary" size="medium">
+          <Button onClick={onSubmit} type="primary" size="medium">
             Войти
           </Button>
           <div className={styles.wrapper + " mt-20"}>

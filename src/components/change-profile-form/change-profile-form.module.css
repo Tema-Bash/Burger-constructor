@@ -1,0 +1,11 @@
+.inputContainer {
+  display: flex;
+}
+.inputContainer div:not(input + div) {
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -17,10 +17,7 @@ import { CLEAR_ORDER_NUMBER } from "../services/actions/order";
 
 export function IngredientsShop() {
   const dispatch = useDispatch();
-  //получаем все ингредиенты из стор-а
-  const { ingredients, selectedIngredient } = useSelector(
-    (store) => store.ingredients
-  );
+
   const { orderNumber } = useSelector((store) => store.order);
   //заправшиваем список ингредиентов
   useEffect(() => {
@@ -39,11 +36,6 @@ export function IngredientsShop() {
           <OrderDetails orderNumber={orderNumber} />
         </Modal>
       )}
-      {/*selectedIngredient && (
-        <Modal title="Детали ингредиента" onClose={closeAllModals}>
-          <IngredientDetails />
-        </Modal>
-      )*/}
 
       <section className={styles.container}>
         <DndProvider backend={HTML5Backend}>
@@ -54,5 +46,3 @@ export function IngredientsShop() {
     </div>
   );
 }
-
-//export default IngredientsShop;

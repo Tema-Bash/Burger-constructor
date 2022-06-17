@@ -25,14 +25,6 @@
   align-items: center;
 }
 
-.inputContainer {
-  display: flex;
-}
-
-.inputContainer div:not(input + div) {
-  width: 100%;
-}
-
 .linkActive {
   color: #f2f2f3;
 }
@@ -40,9 +32,4 @@
 .item {
   display: flex;
   text-decoration: none;
-}
-
-.buttons {
-  display: flex;
-  justify-content: flex-end;
 }
