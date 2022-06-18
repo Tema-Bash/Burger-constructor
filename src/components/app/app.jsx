@@ -17,9 +17,24 @@ import Modal from "../modal/modal";
 import { SELECT_INGREDIENT } from "../../services/actions/ingredients";
 import { CLEAR_ORDER_NUMBER } from "../../services/actions/order";
 
+import { useEffect } from "react";
+import { getCookie } from "../../utils/utils";
+import { profileRequest } from "../../services/actions/authorization";
+
 export default function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { user } = useSelector((store) => store.auth);
+  const isAuth = Object.keys(user).length !== 0;
+  useEffect(() => {
+    if (!isAuth) {
+      const token = getCookie("accessToken");
+      if (token) {
+        dispatch(profileRequest(token));
+      }
+    }
+  }, [user, dispatch]);
 
   //Посещал ли пользователь первый этап восстановления пароля
   const [visitForgotPass, setVisitForgotPass] = useState(false);
