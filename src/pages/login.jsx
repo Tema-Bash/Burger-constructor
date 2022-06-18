@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
 import styles from "./login.module.css";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   PasswordInput,
   Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authorization } from "../services/actions/authorization.js";
 
 export function LoginPage() {
-  const { user } = useSelector((store) => store.auth);
-  const isAuth = Object.keys(user).length !== 0;
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation();
+
   // Состояние, в котором содержится значения полей ввода
   const [form, setValue] = useState({ email: "", password: "" });
 
@@ -27,12 +24,6 @@ export function LoginPage() {
     e.preventDefault();
     dispatch(authorization(form.email, form.password));
   }
-
-  /*useEffect(() => {
-    if (isAuth) {
-      navigate(location.state?.from || "/");
-    }
-  }, [isAuth, navigate, location]);*/
 
   return (
     <div className={styles.App}>
