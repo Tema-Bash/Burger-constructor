@@ -52,7 +52,7 @@ function ProfileForm() {
   );
 
   return (
-    <form>
+    <form onSubmit={saveProfile}>
       <div className={styles.inputContainer + " mb-6"}>
         <Input
           type={"text"}
@@ -103,7 +103,7 @@ function ProfileForm() {
           <Button onClick={cancelHandler} type="secoundary" size="medium">
             Отмена
           </Button>
-          <Button onClick={saveProfile} type="primary" size="medium">
+          <Button type="primary" size="medium">
             Сохранить
           </Button>
         </div>

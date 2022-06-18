@@ -20,7 +20,7 @@ export function RegistrationPage() {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleRegisterClick = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     dispatch(registerRequest(form.name, form.email, form.password));
   };
@@ -28,7 +28,7 @@ export function RegistrationPage() {
   return (
     <div className={styles.App}>
       <section className={styles.container}>
-        <form className={styles.form}>
+        <form onSubmit={handleRegister} className={styles.form}>
           <p className="text text_type_main-medium mb-6">Регистрация</p>
           <div className={styles.inputContainer + " mb-6"}>
             <Input
@@ -68,7 +68,7 @@ export function RegistrationPage() {
               size={"default"}
             />
           </div>
-          <Button onClick={handleRegisterClick} type="primary" size="medium">
+          <Button type="primary" size="medium">
             Зарегистрироваться
           </Button>
           <div className={styles.wrapper + " mt-20"}>
