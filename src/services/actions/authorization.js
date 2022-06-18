@@ -26,7 +26,7 @@ export const SAVE_PROFILE_FAILED = "SAVE_PROFILE_FAILED";
 export const profileRequest = (accessTokenValue) => {
   return async (dispatch) => {
     dispatch({
-      type: "PROFILE_REQUEST",
+      type: PROFILE_REQUEST,
     });
 
     await getUser(accessTokenValue)
@@ -54,7 +54,7 @@ export const profileRequest = (accessTokenValue) => {
 export const updateRequest = (accessTokenValue, email, name, password) => {
   return async (dispatch) => {
     dispatch({
-      type: "SAVE_PROFILE_REQUEST",
+      type: SAVE_PROFILE_REQUEST,
     });
 
     await updateUser(accessTokenValue, email, name, password)
@@ -148,7 +148,7 @@ export const registerRequest = (name, email, password) => {
 export const exitRequest = (refreshTokenValue) => {
   return async (dispatch) => {
     await dispatch({
-      type: "EXIT_REQUEST",
+      type: EXIT_REQUEST,
     });
 
     await logout(refreshTokenValue)
