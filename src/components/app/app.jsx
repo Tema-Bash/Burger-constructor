@@ -1,21 +1,21 @@
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import AppHeader from "./components/app-header/app-header";
-import { IngredientsShop } from "./pages/ingredients-shop";
-import { LoginPage } from "./pages/login";
-import { RegistrationPage } from "./pages/registration.jsx";
-import { ForgotPasswordPage } from "./pages/forgot-password.jsx";
-import { ResetPasswordPage } from "./pages/reset-password.jsx";
-import { ProfilePage } from "./pages/profile.jsx";
-import { NotFound404 } from "./pages/not-found.jsx";
-import { ProtectedRoute } from "./components/protectedRoute";
-import { IngredientPage } from "./pages/ingredient-page";
+import AppHeader from "../app-header/app-header";
+import { IngredientsShop } from "../../pages/ingredients-shop";
+import { LoginPage } from "../../pages/login";
+import { RegistrationPage } from "../../pages/registration.jsx";
+import { ForgotPasswordPage } from "../../pages/forgot-password.jsx";
+import { ResetPasswordPage } from "../../pages/reset-password.jsx";
+import { ProfilePage } from "../../pages/profile.jsx";
+import { NotFound404 } from "../../pages/not-found.jsx";
+import { ProtectedRoute } from "../protectedRoute";
+import { IngredientPage } from "../../pages/ingredient-page";
 
 import { useDispatch, useSelector } from "react-redux";
-import IngredientDetails from "./components/ingredient-details/ingredient-details";
-import Modal from "./components/modal/modal";
-import { SELECT_INGREDIENT } from "./services/actions/ingredients";
-import { CLEAR_ORDER_NUMBER } from "./services/actions/order";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import Modal from "../modal/modal";
+import { SELECT_INGREDIENT } from "../../services/actions/ingredients";
+import { CLEAR_ORDER_NUMBER } from "../../services/actions/order";
 
 export default function App() {
   const navigate = useNavigate();
@@ -53,7 +53,14 @@ export default function App() {
             ></Route>
           </>
         )}
-        <Route path="/login" element={<LoginPage />}></Route>
+        <Route
+          path="/login"
+          element={
+            <ProtectedRoute anonymous={true}>
+              <LoginPage />
+            </ProtectedRoute>
+          }
+        ></Route>
         <Route
           path="/register"
           element={

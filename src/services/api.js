@@ -1,12 +1,5 @@
 import { URL, tokenlifeTime } from "../utils/consts";
-import { getCookie, setCookie } from "../utils/utils";
-
-const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка ${res.status}`);
-};
+import { checkResponse, getCookie, setCookie } from "../utils/utils";
 
 export const getUser = (accessTokenValue) => {
   return fetchWithRefresh(`${URL}/auth/user`, {

@@ -6,16 +6,13 @@ export function ProtectedRoute({ anonymous = false, children }) {
   const { user } = useSelector((store) => store.auth);
   const isAuth = Object.keys(user).length !== 0;
   const location = useLocation();
-
   // Если разрешен только неавторизованный доступ, а пользователь авторизован...
   if (anonymous && isAuth) {
-    // ...то отправляем его, например, на главную
-    return <Navigate to="/" replace={true} />;
+    return <Navigate to={location.state?.from || "/"} replace={true} />;
   }
 
   // Если требуется авторизация, а пользователь не авторизован...
   if (!anonymous && !isAuth) {
-    // ...то отправляем его, например, на форму входа
     return (
       <Navigate
         to="/login"

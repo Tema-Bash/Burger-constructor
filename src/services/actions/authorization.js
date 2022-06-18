@@ -1,9 +1,4 @@
-import {
-  checkResponse,
-  getCookie,
-  setCookie,
-  deleteCookie,
-} from "../../utils/utils";
+import { setCookie, deleteCookie } from "../../utils/utils";
 import { tokenlifeTime } from "../../utils/consts";
 
 import { getUser, register, logout, login, updateUser } from "../api.js";
@@ -28,7 +23,6 @@ export const SAVE_PROFILE_REQUEST = "SAVE_PROFILE_REQUEST";
 export const SAVE_PROFILE_SUCCESS = "SAVE_PROFILE_SUCCESS";
 export const SAVE_PROFILE_FAILED = "SAVE_PROFILE_FAILED";
 
-//Все экшены взаимодействуют с объектом User
 export const profileRequest = (accessTokenValue) => {
   return async (dispatch) => {
     dispatch({

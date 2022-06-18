@@ -28,11 +28,11 @@ export function LoginPage() {
     dispatch(authorization(form.email, form.password));
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (isAuth) {
       navigate(location.state?.from || "/");
     }
-  }, [isAuth, navigate, location]);
+  }, [isAuth, navigate, location]);*/
 
   return (
     <div className={styles.App}>

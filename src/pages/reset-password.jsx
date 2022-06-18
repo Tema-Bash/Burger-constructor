@@ -42,7 +42,7 @@ export function ResetPasswordPage({ visitForgotPass }) {
   return (
     <div className={styles.App}>
       <section className={styles.container}>
-        <form className={styles.form}>
+        <form onSubmit={savePassword} className={styles.form}>
           <p className="text text_type_main-medium mb-6">
             Восстановление пароля
           </p>
@@ -76,7 +76,7 @@ export function ResetPasswordPage({ visitForgotPass }) {
               size={"default"}
             />
           </div>
-          <Button onClick={savePassword} type="primary" size="medium">
+          <Button type="primary" size="medium">
             Сохранить
           </Button>
           <div className={styles.wrapper + " mt-20"}>
