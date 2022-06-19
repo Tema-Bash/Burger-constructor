@@ -20,64 +20,62 @@ export function ProfilePage() {
   });
 
   return (
-    <div className={styles.App}>
-      <section className={styles.container}>
-        <ul className={styles.navList}>
-          <li className={styles.listItem}>
-            <NavLink
-              //activeClassName={styles.linkActive}
-              to={{ pathname: "/profile" }}
-              className={styles.item}
+    <section className={styles.container}>
+      <ul className={`${styles.menu}`}>
+        <li className={styles.listItem}>
+          <NavLink
+            //activeClassName={styles.linkActive}
+            to={{ pathname: "/profile" }}
+            className={styles.item}
+          >
+            <p
+              className={`text text_type_main-medium ${
+                pathname == "/profile"
+                  ? styles.linkActive
+                  : "text_color_inactive"
+              }`}
             >
-              <p
-                className={`text text_type_main-medium ${
-                  pathname == "/profile"
-                    ? styles.linkActive
-                    : "text_color_inactive"
-                }`}
-              >
-                Профиль
-              </p>
-            </NavLink>
-          </li>
-          <li className={styles.listItem}>
-            <NavLink
-              //activeClassName={styles.linkActive}
-              to={{ pathname: "/profile/orders" }}
-              className={styles.item}
-            >
-              <p
-                className={`text text_type_main-medium ${
-                  pathname == "/profile/orders"
-                    ? styles.linkActive
-                    : "text_color_inactive"
-                }`}
-              >
-                История заказов
-              </p>
-            </NavLink>
-          </li>
-          <li className={styles.listItem} onClick={() => logOut()}>
-            <NavLink
-              //activeClassName={styles.linkActive}
-              to={{ pathname: "/login" }}
-              className={styles.item}
-            >
-              <p className="text text_type_main-medium text_color_inactive">
-                Выход
-              </p>
-            </NavLink>
-          </li>
-          <li className="mt-20">
-            <p className="text text_type_main-default text_color_inactive">
-              В этом разделе вы можете изменить свои персональные данные
+              Профиль
             </p>
-          </li>
-        </ul>
+          </NavLink>
+        </li>
+        <li className={styles.listItem}>
+          <NavLink
+            //activeClassName={styles.linkActive}
+            to={{ pathname: "/profile/orders" }}
+            className={styles.item}
+          >
+            <p
+              className={`text text_type_main-medium ${
+                pathname == "/profile/orders"
+                  ? styles.linkActive
+                  : "text_color_inactive"
+              }`}
+            >
+              История заказов
+            </p>
+          </NavLink>
+        </li>
+        <li className={styles.listItem} onClick={() => logOut()}>
+          <NavLink
+            //activeClassName={styles.linkActive}
+            to={{ pathname: "/login" }}
+            className={styles.item}
+          >
+            <p className="text text_type_main-medium text_color_inactive">
+              Выход
+            </p>
+          </NavLink>
+        </li>
+        <li className="mt-20">
+          <p className="text text_type_main-default text_color_inactive">
+            В этом разделе вы можете изменить свои персональные данные
+          </p>
+        </li>
+      </ul>
 
-        {location.pathname === "/profile" && <ProfileForm />}
-        {location.pathname.includes("/orders") && <OrderHistory />}
-      </section>
-    </div>
+      {location.pathname === "/profile" && <ProfileForm />}
+      {location.pathname.includes("/orders") && <OrderHistory />}
+    </section>
   );
 }

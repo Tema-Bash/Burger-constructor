@@ -30,7 +30,7 @@ function AppHeader() {
             </NavLink>
           </li>
           <li className={styles.lenta + " ml-2 p-5 mt-4 mb-4"}>
-            <NavLink to={{ pathname: "/login" }} className={styles.item}>
+            <NavLink to={{ pathname: "/feed" }} className={styles.item}>
               <ListIcon type={pathname == "/login" ? "primary" : "secondary"} />
               <p
                 className={`text text_type_main-default ${

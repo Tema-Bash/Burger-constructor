@@ -1,0 +1,46 @@
+.orderItem {
+  background-color: #1c1c21;
+  border-radius: 40px;
+}
+
+.id {
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ingredients {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  position: relative;
+}
+
+.image {
+  width: 64px;
+  height: 64px;
+  border: solid 2px #801ab2;
+  border-radius: 100px;
+  background-size: cover;
+  background-position: center;
+  background-color: #131316;
+}
+
+.counter {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  z-index: 100;
+}
+
+.price {
+  display: flex;
+  gap: 9px;
+}

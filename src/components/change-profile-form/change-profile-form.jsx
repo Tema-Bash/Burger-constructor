@@ -52,13 +52,13 @@ function ProfileForm() {
   );
 
   return (
-    <form onSubmit={saveProfile}>
+    <form onSubmit={saveProfile} className={`${styles.form} mt-30`}>
       <div className={styles.inputContainer + " mb-6"}>
         <Input
           type={"text"}
           placeholder={"Имя"}
           onChange={handleChange}
-          //icon={'CurrencyIcon'}
+          icon={"EditIcon"}
           value={form.name}
           name={"name"}
           error={false}
@@ -73,7 +73,7 @@ function ProfileForm() {
           type={"text"}
           placeholder={"Логин"}
           onChange={handleChange}
-          //icon={'CurrencyIcon'}
+          icon={"EditIcon"}
           value={form.login}
           name={"login"}
           error={false}
@@ -88,7 +88,7 @@ function ProfileForm() {
           type={"password"}
           placeholder={"Пароль"}
           onChange={handleChange}
-          //icon={'CurrencyIcon'}
+          icon={"EditIcon"}
           value={form.password}
           name={"password"}
           error={false}
