@@ -28,7 +28,7 @@ function Order() {
         <ul className={styles.list}>
           {ingredients &&
             ingredients.map((el, index) => {
-              console.log(el.image);
+              //console.log(el.image);
               if (index < 6) {
                 return (
                   <React.Fragment key={index}>

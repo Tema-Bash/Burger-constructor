@@ -19,7 +19,7 @@ export function ForgotPasswordPage({ setVisitForgotPass }) {
   let resetHandler = useCallback(
     (e) => {
       e.preventDefault();
-      setVisitForgotPass(true);
+      //setVisitForgotPass(true);
 
       forgotPass(form.email)
         .then((res) => {

@@ -1,5 +1,5 @@
 import { URL, tokenlifeTime } from "../utils/consts";
-import { checkResponse, getCookie, setCookie } from "../utils/utils";
+import { checkResponse, setCookie } from "../utils/utils";
 
 export const getUser = (accessTokenValue) => {
   return fetchWithRefresh(`${URL}/auth/user`, {

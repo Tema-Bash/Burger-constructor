@@ -53,7 +53,7 @@ export function LoginPage() {
               size={"default"}
             />
           </div>
-          <Button onClick={onSubmit} type="primary" size="medium">
+          <Button type="primary" size="medium">
             Войти
           </Button>
           <div className={styles.wrapper + " mt-20"}>

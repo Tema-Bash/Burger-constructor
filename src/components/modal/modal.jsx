@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
 import ReactDOM from "react-dom";
 import styles from "./modal.module.css";
 import PropTypes from "prop-types";
@@ -9,8 +7,6 @@ import ModalOverlay from "../modal-overlay/modal-overlay";
 
 const modalsContainer = document.querySelector("#modals");
 export default function Modal({ title, onClose, children }) {
-  const navigate = useNavigate();
-  const location = useLocation();
   // Обработка нажатия Esc
   const handleEscKeydown = (e) => {
     e.key === "Escape" && onClose();
@@ -22,13 +18,6 @@ export default function Modal({ title, onClose, children }) {
       document.removeEventListener("keydown", handleEscKeydown);
     };
   }, []);
-
-  const { selectedIngredient } = useSelector((store) => store.ingredients);
-  useEffect(() => {
-    if (!selectedIngredient) {
-      navigate("/");
-    }
-  }, [selectedIngredient, navigate, location]);
 
   return ReactDOM.createPortal(
     <>

@@ -14,6 +14,9 @@ export default function Ingredient({ el }) {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { ingredients } = useSelector((store) => store.ingredients);
+  const { burgerStructure } = useSelector((store) => store.burger);
+  let count = burgerStructure.filter((item) => item._id === el._id).length;
 
   const onIngredientSelected = (id) => {
     const pathname = `/ingredients/${id}`;
@@ -25,9 +28,6 @@ export default function Ingredient({ el }) {
       ingredient: ingredients.find((el) => el._id === id),
     });
   };
-  const { ingredients } = useSelector((store) => store.ingredients);
-  const { burgerStructure } = useSelector((store) => store.burger);
-  let count = burgerStructure.filter((item) => item._id === el._id).length;
 
   const [{ opacity }, ref] = useDrag({
     type: "ingredient",
