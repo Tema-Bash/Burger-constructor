@@ -11,7 +11,7 @@ import { ADD_INGREDIENT } from "../../services/actions/burger";
 import BurgerConstructorIngredient from "../burger-constructor-ingredient/burger-constructor-ingredient";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
-import { getCookie } from "../../utils/utils";
+import { getCookie, totalSumm } from "../../utils/utils";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -117,9 +117,7 @@ function BurgerConstructor() {
         <p className="text text_type_main-large mr-2">
           {burgerStructure.length == 0
             ? 0
-            : burgerStructure.reduce((total, current) => {
-                return total + Number(current.price);
-              }, burgerStructure[0].price)}
+            : totalSumm(burgerStructure, "price")}
         </p>
         <div className="mr-10">
           <CurrencyIcon type="primary" />

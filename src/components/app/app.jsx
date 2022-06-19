@@ -108,14 +108,7 @@ export default function App() {
             </ProtectedRoute>
           }
         ></Route>
-        <Route
-          path="/feed/*"
-          element={
-            <ProtectedRoute anonymous={false}>
-              <FeedPage />
-            </ProtectedRoute>
-          }
-        ></Route>
+        <Route path="/feed/*" element={<FeedPage />}></Route>
         <Route path="/ingredients/:id" element={<IngredientPage />}></Route>
         <Route path="*" element={<NotFound404 />}></Route>
       </Routes>

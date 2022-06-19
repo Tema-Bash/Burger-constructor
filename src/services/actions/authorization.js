@@ -150,7 +150,7 @@ export const exitRequest = (refreshTokenValue) => {
     await dispatch({
       type: EXIT_REQUEST,
     });
-
+    console.log(`exitRequest`);
     await logout(refreshTokenValue)
       .then((res) => {
         if (res && res.success) {
