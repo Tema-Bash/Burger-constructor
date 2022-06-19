@@ -11,7 +11,7 @@ import { getIngredients } from "../../services/actions/ingredients";
 
 function OrderHistory() {
   const dispatch = useDispatch();
-  const { wsRequested, wsConnected, orders, total, totalToday } = useSelector(
+  const { wsRequested, wsConnected, orders } = useSelector(
     (store) => store.webSocket
   );
 
@@ -27,13 +27,6 @@ function OrderHistory() {
   }, [wsConnected, wsRequested, dispatch]);
 
   useEffect(() => () => dispatch(wsConnectionClosed()), [dispatch]);
-
-  const doneNums = orders.filter(
-    (order, idx) => idx < 10 && order.status === "done"
-  );
-  const pendingNums = orders.filter(
-    (order, idx) => idx < 10 && order.status === "pending"
-  );
 
   return (
     <section className={`${styles.orders} mt-10`}>
