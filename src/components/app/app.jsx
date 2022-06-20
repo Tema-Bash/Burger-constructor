@@ -11,6 +11,7 @@ import { NotFound404 } from "../../pages/not-found.jsx";
 import { ProtectedRoute } from "../protectedRoute";
 import { IngredientPage } from "../../pages/ingredient-page";
 import FeedPage from "../../pages/feed";
+import OrderPage from "../../pages/order-page";
 import { useDispatch, useSelector } from "react-redux";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
@@ -109,6 +110,7 @@ export default function App() {
           }
         ></Route>
         <Route path="/feed/*" element={<FeedPage />}></Route>
+        <Route path="/feed/:id" element={<OrderPage />} />
         <Route path="/ingredients/:id" element={<IngredientPage />}></Route>
         <Route path="*" element={<NotFound404 />}></Route>
       </Routes>

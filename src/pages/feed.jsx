@@ -3,6 +3,7 @@ import Order from "../components/order/order";
 import styles from "../pages/feed.module.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   wsConnectionClosed,
   wsConnectionStart,
@@ -11,9 +12,16 @@ import { getIngredients } from "../services/actions/ingredients";
 
 function FeedPage() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { wsRequested, wsConnected, orders, total, totalToday } = useSelector(
     (store) => store.webSocket
   );
+
+  const orderOpenHandler = (id) => {
+    const pathname = `/feed/${id}`;
+    navigate(pathname, { state: { background: { ...location, pathname } } });
+  };
 
   //заправшиваем список ингредиентов
   useEffect(() => {
@@ -35,6 +43,10 @@ function FeedPage() {
     (order, idx) => idx < 10 && order.status === "pending"
   );
 
+  if (!orders) {
+    return null;
+  }
+
   return (
     <section className={`${styles.feed}`}>
       <div className={`${styles.container} mr-15 mt-10`}>
@@ -43,7 +55,13 @@ function FeedPage() {
         </h1>
         <ul className={styles.feedItems}>
           {orders.map((order, index) => {
-            return <Order order={order} key={index} />;
+            return (
+              <Order
+                order={order}
+                key={index}
+                orderOpenHandler={() => orderOpenHandler(order.number)}
+              />
+            );
           })}
         </ul>
       </div>

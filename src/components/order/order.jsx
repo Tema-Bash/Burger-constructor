@@ -4,9 +4,8 @@ import { useSelector } from "react-redux";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { dateToString, statusToString, totalSumm } from "../../utils/utils";
 
-function Order({ order }) {
+function Order({ order, orderOpenHandler }) {
   const { ingredients } = useSelector((store) => store.ingredients);
-  const [images, setImages] = useState([]);
   const [ingredientsInOrder, setIngredientsInOrder] = useState([]);
 
   useEffect(() => {
@@ -24,7 +23,7 @@ function Order({ order }) {
   }
 
   return (
-    <li className={`${styles.orderItem} p-6 mb-6`}>
+    <li className={`${styles.orderItem} p-6 mb-6`} onClick={orderOpenHandler}>
       <div className={styles.header}>
         <p className={`${styles.id} text_type_digits-default`}>
           #{order.number}

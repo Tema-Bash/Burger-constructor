@@ -3,6 +3,11 @@
   border-radius: 40px;
 }
 
+.orderItem:hover {
+  cursor: pointer;
+  transform: scale(0.98);
+}
+
 .id {
   margin: 0;
 }

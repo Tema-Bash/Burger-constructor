@@ -1,5 +1,3 @@
-import { URL } from "../../utils/consts";
-import { checkResponse } from "../../utils/utils";
 import { sendOrder } from "../api";
 export const ORDER_REQUEST = "ORDER_REQUEST";
 export const ORDER_SUCCESS = "ORDER_SUCCESS";

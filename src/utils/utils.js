@@ -12,6 +12,24 @@ export function totalSumm(object, key) {
   return res;
 }
 
+export const counter = (targetItem, array, currItem) => {
+  const counts = {};
+  let idsOfArray = array.map((item) => {
+    return item[targetItem];
+  });
+  idsOfArray.forEach((item, i) => {
+    counts[item] = (counts[item] || 0) + 1;
+  });
+  //Если передали конкретный элемент возвращаем его количество
+  if (currItem) {
+    return counts[currItem];
+  }
+  //Иначе возвращаем Массив уникальных ингредиентов
+  return Object.keys(counts).map((id, index) => {
+    return array.find((item) => item._id == id);
+  });
+};
+
 export const statusToString = (status) => {
   switch (status) {
     case "created":
