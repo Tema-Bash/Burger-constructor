@@ -17,7 +17,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { SELECT_INGREDIENT } from "../../services/actions/ingredients";
 import { CLEAR_ORDER_NUMBER } from "../../services/actions/order";
-
+import OrderInformation from "../order-information/order-information";
 import { useEffect } from "react";
 import { getCookie } from "../../utils/utils";
 import { profileRequest } from "../../services/actions/authorization";
@@ -48,7 +48,6 @@ export default function App() {
 
   const location = useLocation();
   const background = location.state?.background;
-
   return (
     <>
       <AppHeader />
@@ -65,6 +64,28 @@ export default function App() {
                     <IngredientDetails />
                   </Modal>
                 </>
+              }
+            ></Route>
+            <Route
+              path="/feed/:id"
+              element={
+                <>
+                  <FeedPage />
+                  <Modal onClose={closeAllModals}>
+                    <OrderInformation />
+                  </Modal>
+                </>
+              }
+            />
+            <Route
+              path="/profile/orders/:id"
+              element={
+                <ProtectedRoute anonymous={false}>
+                  <ProfilePage />
+                  <Modal onClose={closeAllModals}>
+                    <OrderInformation />
+                  </Modal>
+                </ProtectedRoute>
               }
             ></Route>
           </>
@@ -101,6 +122,14 @@ export default function App() {
             </ProtectedRoute>
           }
         ></Route>
+        <Route
+          path="/profile/orders/:id"
+          element={
+            <ProtectedRoute anonymous={true}>
+              <OrderPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/profile/*"
           element={
