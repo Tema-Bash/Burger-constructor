@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  margin: 0 auto;
+  gap: 60px;
+  max-width: 1240px;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 120px 0 0 0;
+  max-width: 320px;
+}
+
+.listItem {
+  width: 320px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.linkActive {
+  color: #f2f2f3;
+}
+
+.item {
+  display: flex;
+  text-decoration: none;
+}

@@ -1,0 +1,16 @@
+.inputContainer {
+  display: flex;
+}
+.inputContainer div:not(input + div) {
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form {
+  max-width: 480px;
+  width: 100%;
+}

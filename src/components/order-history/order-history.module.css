@@ -1,0 +1,20 @@
+.orders {
+  width: 100%;
+}
+
+.orderList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+  max-height: 868px;
+}
+
+.orderList::-webkit-scrollbar {
+  width: 8px;
+  background-color: #2f2f37;
+}
+
+.orderList::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}

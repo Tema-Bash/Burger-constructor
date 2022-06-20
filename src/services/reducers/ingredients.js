@@ -3,7 +3,7 @@ import {
   INGREDIENTS_SUCCESS,
   INGREDIENTS_FAILED,
   SELECT_INGREDIENT,
-} from '../actions/ingredients';
+} from "../actions/ingredients";
 
 const initialState = {
   ingredients: [],
