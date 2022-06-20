@@ -8,6 +8,7 @@ import {
   wsConnectionStart,
 } from "../../services/actions/web-socket";
 import { getIngredients } from "../../services/actions/ingredients";
+import { getCookie } from "../../utils/utils";
 
 function OrderHistory() {
   const location = useLocation();
@@ -28,7 +29,7 @@ function OrderHistory() {
 
   useEffect(() => {
     if (!wsConnected && !wsRequested) {
-      dispatch(wsConnectionStart("/all"));
+      dispatch(wsConnectionStart("", getCookie("accessToken")));
     }
   }, [wsConnected, wsRequested, dispatch]);
 
