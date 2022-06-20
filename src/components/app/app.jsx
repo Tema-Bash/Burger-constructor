@@ -126,7 +126,7 @@ export default function App() {
         <Route
           path="/profile/orders/:id"
           element={
-            <ProtectedRoute anonymous={true}>
+            <ProtectedRoute anonymous={false}>
               <OrderPage />
             </ProtectedRoute>
           }

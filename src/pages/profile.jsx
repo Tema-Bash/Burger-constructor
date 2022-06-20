@@ -1,17 +1,11 @@
 import { useCallback } from "react";
 import styles from "./profile.module.css";
 import { NavLink, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { exitRequest } from "../services/actions/authorization.js";
 import ProfileForm from "../components/change-profile-form/change-profile-form";
 import OrderHistory from "../components/order-history/order-history";
-import {
-  wsConnectionClosed,
-  wsConnectionStart,
-} from "../services/actions/web-socket";
-import { getCookie } from "../utils/utils";
 
 export function ProfilePage() {
   const dispatch = useDispatch();
@@ -19,20 +13,10 @@ export function ProfilePage() {
   const { pathname } = useLocation();
   const location = useLocation();
 
-  const { wsRequested, wsConnected } = useSelector((store) => store.webSocket);
-
   let logOut = useCallback(async () => {
     await dispatch(exitRequest(localStorage.getItem("refreshToken")));
     navigate("/login");
   });
-
-  useEffect(() => {
-    if (!wsConnected && !wsRequested) {
-      dispatch(wsConnectionStart("", getCookie("accessToken")));
-    }
-  }, [wsConnected, wsRequested, dispatch]);
-
-  useEffect(() => () => dispatch(wsConnectionClosed()), [dispatch]);
 
   return (
     <section className={styles.container}>
