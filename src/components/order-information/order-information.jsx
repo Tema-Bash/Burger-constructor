@@ -1,7 +1,7 @@
 import styles from "./order-information.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getIngredients } from "../../services/actions/ingredients";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import {

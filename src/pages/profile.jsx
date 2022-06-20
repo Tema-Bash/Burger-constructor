@@ -12,25 +12,19 @@ import {
   wsConnectionStart,
 } from "../services/actions/web-socket";
 import { getCookie } from "../utils/utils";
+
 export function ProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const location = useLocation();
 
-  const { wsRequested, wsConnected, orders } = useSelector(
-    (store) => store.webSocket
-  );
+  const { wsRequested, wsConnected } = useSelector((store) => store.webSocket);
 
   let logOut = useCallback(async () => {
     await dispatch(exitRequest(localStorage.getItem("refreshToken")));
     navigate("/login");
   });
-
-  const onOrderChoose = (id) => {
-    const pathname = `/profile/orders/${id}`;
-    navigate(pathname, { state: { background: { ...location, pathname } } });
-  };
 
   useEffect(() => {
     if (!wsConnected && !wsRequested) {

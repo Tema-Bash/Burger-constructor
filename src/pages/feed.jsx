@@ -1,4 +1,3 @@
-import React from "react";
 import Order from "../components/order/order";
 import styles from "../pages/feed.module.css";
 import { useEffect } from "react";

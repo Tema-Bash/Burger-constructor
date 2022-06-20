@@ -11,7 +11,7 @@ function Order({ order, orderOpenHandler }) {
   useEffect(() => {
     if (order && ingredients) {
       setIngredientsInOrder(
-        order.ingredients.map((item, index) => {
+        order.ingredients.map((item) => {
           return ingredients.find((i) => i._id === item);
         })
       );

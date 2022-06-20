@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./order-history.module.css";
 import Order from "../order/order";
 import { useEffect } from "react";

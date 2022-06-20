@@ -11,7 +11,7 @@ export function ProtectedRoute({ anonymous = false, children }) {
 
   useEffect(() => {
     if (!isAuthChecked) {
-      return <Preloader />; // Показываем типа загрузку приложения
+      return <Preloader />; // Показываем загрузку приложения
     }
   }, [isAuthChecked]);
 

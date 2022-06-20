@@ -1,5 +1,4 @@
 import styles from "./login.module.css";
-import {} from "@ya.praktikum/react-developer-burger-ui-components";
 
 export function NotFound404() {
   return (
