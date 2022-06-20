@@ -1,11 +1,19 @@
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-
+import Preloader from "../pages/preloader";
+import { useEffect } from "react";
 export function ProtectedRoute({ anonymous = false, children }) {
   const { user } = useSelector((store) => store.auth);
+  const { isAuthChecked } = useSelector((store) => store.auth);
   const isAuth = Object.keys(user).length !== 0;
   const location = useLocation();
+
+  useEffect(() => {
+    if (!isAuthChecked) {
+      return <Preloader />; // Показываем типа загрузку приложения
+    }
+  }, [isAuthChecked]);
 
   // Если разрешен только неавторизованный доступ, а пользователь авторизован...
   if (anonymous && isAuth) {

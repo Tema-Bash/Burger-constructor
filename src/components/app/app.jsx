@@ -28,6 +28,7 @@ export default function App() {
 
   const { user } = useSelector((store) => store.auth);
   const isAuth = Object.keys(user).length !== 0;
+
   useEffect(() => {
     if (!isAuth) {
       const token = getCookie("accessToken");

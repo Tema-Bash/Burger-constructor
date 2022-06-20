@@ -10,8 +10,9 @@ import {
   EXIT_FAILED,
   PROFILE_REQUEST,
   PROFILE_SUCCESS,
-  PROFILE_FAILED
-} from '../actions/authorization.js'
+  PROFILE_FAILED,
+  AUTH_CHECKED,
+} from "../actions/authorization.js";
 
 const initialAuth = {
   user: {},
@@ -22,97 +23,105 @@ const initialAuth = {
   exitRequested: false,
   exitFailed: false,
   profileRequested: false,
-  profileFailed: false
-}
+  profileFailed: false,
+
+  isAuthChecked: false,
+};
 //Все редьюсеры взаимодействуют с объектом User
 export function authReducer(state = initialAuth, action) {
   switch (action.type) {
+    case AUTH_CHECKED:
+      return {
+        ...state,
+        isAuthChecked: true,
+      };
+
     case REGISTER_REQUEST:
       return {
         ...state,
         registerRequested: true,
-        registerFailed: false
-      }
+        registerFailed: false,
+      };
 
     case REGISTER_SUCCESS:
       return {
         ...state,
         registerRequested: false,
         registerFailed: false,
-        user: action.user
-      }
+        user: action.user,
+      };
 
     case REGISTER_FAILED:
       return {
         ...state,
-        registerFailed: true
-      }
+        registerFailed: true,
+      };
 
     case LOGIN_REQUEST:
       return {
         ...state,
         loginRequested: true,
-        loginFailed: false
-      }
+        loginFailed: false,
+      };
 
     case LOGIN_SUCCESS:
       return {
         ...state,
         loginRequested: false,
         loginFailed: false,
-        user: action.user
-      }
+        user: action.user,
+      };
 
     case LOGIN_FAILED:
       return {
         ...state,
         loginRequested: false,
-        loginFailed: true
-      }
+        loginFailed: true,
+      };
 
     case EXIT_REQUEST:
       return {
         ...state,
         exitRequested: false,
-        exitFailed: true
-      }
+        exitFailed: true,
+      };
 
     case EXIT_SUCCESS:
       return {
         ...state,
         exitRequested: false,
         exitFailed: true,
-        user: {}
-      }
+        user: {},
+      };
     case EXIT_FAILED:
       return {
         ...state,
         exitRequested: false,
-        exitFailed: true
-      }
+        exitFailed: true,
+      };
 
     case PROFILE_REQUEST:
       return {
         ...state,
         profileRequested: false,
-        profileFailed: true
-      }
+        profileFailed: true,
+      };
 
     case PROFILE_SUCCESS:
       return {
         ...state,
         profileRequested: false,
         profileFailed: true,
-        user: action.user
-      }
+        user: action.user,
+      };
     case PROFILE_FAILED:
       return {
         ...state,
         profileRequested: false,
-        profileFailed: true
-      }
+        profileFailed: true,
+      };
 
     default:
-      return state
+      return state;
   }
 }

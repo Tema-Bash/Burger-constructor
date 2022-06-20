@@ -23,6 +23,8 @@ export const SAVE_PROFILE_REQUEST = "SAVE_PROFILE_REQUEST";
 export const SAVE_PROFILE_SUCCESS = "SAVE_PROFILE_SUCCESS";
 export const SAVE_PROFILE_FAILED = "SAVE_PROFILE_FAILED";
 
+export const AUTH_CHECKED = "AUTH_CHECKED";
+
 export const profileRequest = (accessTokenValue) => {
   return async (dispatch) => {
     dispatch({
@@ -36,7 +38,9 @@ export const profileRequest = (accessTokenValue) => {
             type: PROFILE_SUCCESS,
             user: res.user,
           });
+          dispatch({ type: AUTH_CHECKED });
         } else {
+          dispatch({ type: AUTH_CHECKED });
           dispatch({
             type: PROFILE_FAILED,
           });
