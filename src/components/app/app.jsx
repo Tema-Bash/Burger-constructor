@@ -21,11 +21,11 @@ import OrderInformation from "../order-information/order-information";
 import { useEffect } from "react";
 import { getCookie } from "../../utils/utils";
 import { profileRequest } from "../../services/actions/authorization";
+import Preloader from "../../pages/preloader";
 
 export default function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { user } = useSelector((store) => store.auth);
   const isAuth = Object.keys(user).length !== 0;
 
@@ -49,6 +49,15 @@ export default function App() {
 
   const location = useLocation();
   const background = location.state?.background;
+
+  const { isAuthChecked } = useSelector((store) => store.auth);
+
+  useEffect(() => {
+    if (!isAuthChecked) {
+      return <Preloader />; // Показываем загрузку приложения
+    }
+  }, [isAuthChecked]);
+
   return (
     <>
       <AppHeader />
@@ -84,7 +93,7 @@ export default function App() {
                 <ProtectedRoute anonymous={false}>
                   <ProfilePage />
                   <Modal onClose={closeAllModals}>
-                    <OrderInformation />
+                    <OrderInformation secure={true} />
                   </Modal>
                 </ProtectedRoute>
               }

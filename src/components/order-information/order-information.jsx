@@ -14,8 +14,9 @@ import {
   totalSumm,
   counter,
 } from "../../utils/utils";
+import { getCookie } from "../../utils/utils";
 
-export default function OrderInformation() {
+export default function OrderInformation({ secure = false }) {
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -25,7 +26,11 @@ export default function OrderInformation() {
 
   useEffect(() => {
     if (!wsConnected && !wsRequested) {
-      dispatch(wsConnectionStart("/all"));
+      if (secure) {
+        dispatch(wsConnectionStart("", getCookie("accessToken")));
+      } else {
+        dispatch(wsConnectionStart("/all"));
+      }
     }
   }, [wsConnected, wsRequested, dispatch]);
 
@@ -42,22 +47,20 @@ export default function OrderInformation() {
 
   useEffect(async () => {
     await dispatch(getIngredients());
+
     if (orders.length > 0 && ingredientsInOrder.length === 0) {
-      const order = orders.find((el) => el.number === Number(params.id));
-      if (order) {
-        await setOrder(order);
-        if (choosenOrder) {
-          await setIngredientsInOrder(
-            choosenOrder.ingredients &&
-              choosenOrder?.ingredients
-                .map((id, index) => {
-                  return ingredients.find((item) => item._id == id);
-                })
-                .sort((a, b) => {
-                  return a.type === "bun" ? -1 : a._id - b._id;
-                })
-          );
-        }
+      await setOrder(orders.find((el) => el.number === Number(params.id)));
+      if (choosenOrder) {
+        await setIngredientsInOrder(
+          choosenOrder.ingredients &&
+            choosenOrder?.ingredients
+              .map((id, index) => {
+                return ingredients.find((item) => item._id == id);
+              })
+              .sort((a, b) => {
+                return a.type === "bun" ? -1 : a._id - b._id;
+              })
+        );
       }
     }
   }, [orders, choosenOrder, params, ingredientsInOrder]);
