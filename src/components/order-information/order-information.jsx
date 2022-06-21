@@ -62,8 +62,6 @@ export default function OrderInformation() {
     }
   }, [orders, choosenOrder, params, ingredientsInOrder]);
 
-  useEffect(() => () => dispatch(wsConnectionClosed()), [dispatch]);
-
   if (!choosenOrder) {
     return null;
   }
