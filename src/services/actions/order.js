@@ -1,3 +1,4 @@
+import { CLEAR_BURGER } from "./burger";
 import { sendOrder } from "../api";
 export const ORDER_REQUEST = "ORDER_REQUEST";
 export const ORDER_SUCCESS = "ORDER_SUCCESS";
@@ -16,6 +17,10 @@ export const saveOrder = (ingredients, accessTokenValue) => {
           dispatch({
             type: ORDER_SUCCESS,
             orderNumber: res.order.number,
+          });
+          //очищаем бургер
+          dispatch({
+            type: CLEAR_BURGER,
           });
         } else {
           dispatch({
