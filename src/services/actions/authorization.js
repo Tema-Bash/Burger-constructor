@@ -30,7 +30,6 @@ export const profileRequest = (accessTokenValue) => {
     dispatch({
       type: PROFILE_REQUEST,
     });
-
     await getUser(accessTokenValue)
       .then((res) => {
         if (res && res.success) {
@@ -38,20 +37,19 @@ export const profileRequest = (accessTokenValue) => {
             type: PROFILE_SUCCESS,
             user: res.user,
           });
-          dispatch({ type: AUTH_CHECKED });
         } else {
-          dispatch({ type: AUTH_CHECKED });
           dispatch({
             type: PROFILE_FAILED,
           });
         }
       })
       .catch((error) => {
-        console.log(error);
-        dispatch({ type: AUTH_CHECKED });
         dispatch({
           type: PROFILE_FAILED,
         });
+      })
+      .finally(() => {
+        dispatch({ type: AUTH_CHECKED });
       });
   };
 };
@@ -123,7 +121,6 @@ export const registerRequest = (name, email, password) => {
     dispatch({
       type: REGISTER_REQUEST,
     });
-
     register(name, email, password)
       .then((res) => {
         if (res && res.success) {

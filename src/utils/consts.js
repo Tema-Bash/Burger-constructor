@@ -19,5 +19,5 @@ export const wsActions = {
 
 export const URL = "https://norma.nomoreparties.space/api";
 export const initialBurger = [];
-export const tokenlifeTime = 20 * 60;
+export const tokenlifeTime = 1 * 60;
 export const wsURL = "wss://norma.nomoreparties.space/orders";
