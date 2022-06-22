@@ -52,107 +52,110 @@ export default function App() {
 
   const { isAuthChecked } = useSelector((store) => store.auth);
 
-  useEffect(() => {
-    if (!isAuthChecked) {
-      return <Preloader />; // Показываем загрузку приложения
-    }
-  }, [isAuthChecked]);
-
   return (
     <>
-      <AppHeader />
-      <Routes location={background ?? location}>
-        <Route path="/" element={<IngredientsShop />}></Route>
-        {background && (
-          <>
+      {!isAuthChecked ? (
+        <Preloader />
+      ) : (
+        <>
+          <AppHeader />
+          <Routes location={background ?? location}>
+            <Route path="/" element={<IngredientsShop />}></Route>
+            {background && (
+              <>
+                <Route
+                  path="/ingredients/:id"
+                  element={
+                    <>
+                      <IngredientsShop />
+                      <Modal
+                        title="Детали ингредиента"
+                        onClose={closeAllModals}
+                      >
+                        <IngredientDetails />
+                      </Modal>
+                    </>
+                  }
+                ></Route>
+                <Route
+                  path="/feed/:id"
+                  element={
+                    <>
+                      <FeedPage />
+                      <Modal onClose={closeAllModals}>
+                        <OrderInformation />
+                      </Modal>
+                    </>
+                  }
+                />
+                <Route
+                  path="/profile/orders/:id"
+                  element={
+                    <ProtectedRoute anonymous={false}>
+                      <ProfilePage />
+                      <Modal onClose={closeAllModals}>
+                        <OrderInformation secure={true} />
+                      </Modal>
+                    </ProtectedRoute>
+                  }
+                ></Route>
+              </>
+            )}
             <Route
-              path="/ingredients/:id"
+              path="/login"
               element={
-                <>
-                  <IngredientsShop />
-                  <Modal title="Детали ингредиента" onClose={closeAllModals}>
-                    <IngredientDetails />
-                  </Modal>
-                </>
+                <ProtectedRoute anonymous={true}>
+                  <LoginPage />
+                </ProtectedRoute>
               }
             ></Route>
             <Route
-              path="/feed/:id"
+              path="/register"
               element={
-                <>
-                  <FeedPage />
-                  <Modal onClose={closeAllModals}>
-                    <OrderInformation />
-                  </Modal>
-                </>
+                <ProtectedRoute anonymous={true}>
+                  <RegistrationPage />
+                </ProtectedRoute>
               }
-            />
+            ></Route>
+            <Route
+              path="/forgot-password"
+              element={
+                <ProtectedRoute anonymous={true}>
+                  <ForgotPasswordPage setVisitForgotPass={setVisitForgotPass} />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              path="/reset-password"
+              element={
+                <ProtectedRoute anonymous={true}>
+                  <ResetPasswordPage visitForgotPass={visitForgotPass} />
+                </ProtectedRoute>
+              }
+            ></Route>
             <Route
               path="/profile/orders/:id"
               element={
                 <ProtectedRoute anonymous={false}>
+                  <OrderPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile/*"
+              element={
+                <ProtectedRoute anonymous={false}>
                   <ProfilePage />
-                  <Modal onClose={closeAllModals}>
-                    <OrderInformation secure={true} />
-                  </Modal>
                 </ProtectedRoute>
               }
             ></Route>
-          </>
-        )}
-        <Route
-          path="/login"
-          element={
-            <ProtectedRoute anonymous={true}>
-              <LoginPage />
-            </ProtectedRoute>
-          }
-        ></Route>
-        <Route
-          path="/register"
-          element={
-            <ProtectedRoute anonymous={true}>
-              <RegistrationPage />
-            </ProtectedRoute>
-          }
-        ></Route>
-        <Route
-          path="/forgot-password"
-          element={
-            <ProtectedRoute anonymous={true}>
-              <ForgotPasswordPage setVisitForgotPass={setVisitForgotPass} />
-            </ProtectedRoute>
-          }
-        ></Route>
-        <Route
-          path="/reset-password"
-          element={
-            <ProtectedRoute anonymous={true}>
-              <ResetPasswordPage visitForgotPass={visitForgotPass} />
-            </ProtectedRoute>
-          }
-        ></Route>
-        <Route
-          path="/profile/orders/:id"
-          element={
-            <ProtectedRoute anonymous={false}>
-              <OrderPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile/*"
-          element={
-            <ProtectedRoute anonymous={false}>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        ></Route>
-        <Route path="/feed/*" element={<FeedPage />}></Route>
-        <Route path="/feed/:id" element={<OrderPage />} />
-        <Route path="/ingredients/:id" element={<IngredientPage />}></Route>
-        <Route path="*" element={<NotFound404 />}></Route>
-      </Routes>
+            <Route path="/feed/*" element={<FeedPage />}></Route>
+            <Route path="/feed/:id" element={<OrderPage />} />
+            <Route path="/ingredients/:id" element={<IngredientPage />}></Route>
+            <Route path="*" element={<NotFound404 />}></Route>
+          </Routes>
+        </>
+      )}
     </>
   );
 }
