@@ -48,6 +48,7 @@ export const profileRequest = (accessTokenValue) => {
       })
       .catch((error) => {
         console.log(error);
+        dispatch({ type: AUTH_CHECKED });
         dispatch({
           type: PROFILE_FAILED,
         });

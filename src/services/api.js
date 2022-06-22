@@ -112,7 +112,6 @@ const fetchWithRefresh = async (url, options) => {
     const res = await fetch(url, options);
     return await checkResponse(res);
   } catch (err) {
-    console.log(err);
     if (err.message === "jwt expired") {
       console.log(`token update`);
       const refreshData = await refreshToken(

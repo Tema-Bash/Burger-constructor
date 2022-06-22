@@ -28,6 +28,7 @@ export default function App() {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.auth);
   const isAuth = Object.keys(user).length !== 0;
+  const { isAuthChecked } = useSelector((store) => store.auth);
 
   useEffect(() => {
     if (!isAuth) {
@@ -49,8 +50,6 @@ export default function App() {
 
   const location = useLocation();
   const background = location.state?.background;
-
-  const { isAuthChecked } = useSelector((store) => store.auth);
 
   return (
     <>

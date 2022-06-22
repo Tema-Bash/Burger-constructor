@@ -10,12 +10,6 @@ export function ProtectedRoute({ anonymous = false, children }) {
   const isAuth = Object.keys(user).length !== 0;
   const location = useLocation();
 
-  useEffect(() => {
-    if (!isAuthChecked) {
-      return <Preloader />; // Показываем загрузку приложения
-    }
-  }, [isAuthChecked]);
-
   // Если разрешен только неавторизованный доступ, а пользователь авторизован...
   if (anonymous && isAuth) {
     return <Navigate to={location.state?.from || "/"} replace={true} />;
