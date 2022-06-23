@@ -11,9 +11,11 @@ function Order({ order, orderOpenHandler }) {
   useEffect(() => {
     if (order && ingredients) {
       setIngredientsInOrder(
-        order.ingredients.map((item) => {
-          return ingredients.find((i) => i._id === item);
-        })
+        order.ingredients
+          .map((item) => {
+            return ingredients.find((i) => i._id === item);
+          })
+          .reverse()
       );
     }
   }, [order]);
@@ -45,7 +47,7 @@ function Order({ order, orderOpenHandler }) {
       <div className={`${styles.ingredients} mt-6 mb-6`}>
         <ul className={styles.list}>
           {ingredientsInOrder &&
-            ingredientsInOrder.map((el, index) => {
+            ingredientsInOrder.reverse().map((el, index) => {
               if (index < 6) {
                 return (
                   <React.Fragment key={index}>
@@ -53,8 +55,13 @@ function Order({ order, orderOpenHandler }) {
                       className={styles.image}
                       style={{
                         backgroundImage: `url(${el.image})`,
-                        zIndex: ingredientsInOrder.length - index,
-                        opacity: index < 5 ? 1 : 0.6,
+                        zIndex: index,
+                        opacity:
+                          ingredientsInOrder.length > 5
+                            ? index > 0
+                              ? 1
+                              : 0.6
+                            : 1,
                       }}
                     ></div>
                     {index === 5 && (

@@ -7,28 +7,21 @@ import {
   wsConnectionClosed,
   wsConnectionStart,
 } from "../services/actions/web-socket";
-import { getIngredients } from "../services/actions/ingredients";
 
 function FeedPage() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const { wsRequested, wsConnected, orders, total, totalToday } = useSelector(
-    (store) => store.webSocket
-  );
+  const { wsRequested, wsConnected, orders, total, totalToday, wsSecure } =
+    useSelector((store) => store.webSocket);
 
   const orderOpenHandler = (id) => {
     const pathname = `/feed/${id}`;
     navigate(pathname, { state: { background: { ...location, pathname } } });
   };
 
-  //заправшиваем список ингредиентов
   useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (!wsConnected && !wsRequested) {
+    if ((!wsConnected && !wsRequested) || wsSecure) {
       dispatch(wsConnectionStart("/all"));
     }
   }, [wsConnected, wsRequested, dispatch]);

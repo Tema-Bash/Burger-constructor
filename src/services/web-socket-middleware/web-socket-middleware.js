@@ -36,7 +36,7 @@ export const socketMiddleware = (wsUrl, wsActions) => {
           if (success == true) {
             dispatch({ type: onMessage, payload: restParsedData });
           } else {
-            alert(`Error`);
+            console.log(`Error`);
           }
         };
 

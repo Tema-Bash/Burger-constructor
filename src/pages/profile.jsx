@@ -1,11 +1,17 @@
 import { useCallback } from "react";
 import styles from "./profile.module.css";
 import { NavLink, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { exitRequest } from "../services/actions/authorization.js";
 import ProfileForm from "../components/change-profile-form/change-profile-form";
 import OrderHistory from "../components/order-history/order-history";
+import { useEffect } from "react";
+import { getCookie } from "../utils/utils";
+import {
+  wsConnectionClosed,
+  wsConnectionStart,
+} from "../services/actions/web-socket";
 
 export function ProfilePage() {
   const dispatch = useDispatch();
@@ -13,10 +19,22 @@ export function ProfilePage() {
   const { pathname } = useLocation();
   const location = useLocation();
 
+  const { wsRequested, wsConnected, orders, wsSecure } = useSelector(
+    (store) => store.webSocket
+  );
+
   let logOut = useCallback(async () => {
     await dispatch(exitRequest(localStorage.getItem("refreshToken")));
     navigate("/login");
   });
+
+  useEffect(() => {
+    if ((!wsConnected && !wsRequested) || !wsSecure) {
+      dispatch(wsConnectionStart("", getCookie("accessToken")));
+    }
+  }, [wsConnected, wsRequested, dispatch]);
+
+  useEffect(() => () => dispatch(wsConnectionClosed()), [dispatch]);
 
   return (
     <section className={styles.container}>
@@ -62,7 +80,9 @@ export function ProfilePage() {
       </ul>
 
       {location.pathname === "/profile" && <ProfileForm />}
-      {location.pathname.includes("/orders") && <OrderHistory />}
+      {location.pathname.includes("/orders") && (
+        <OrderHistory orders={orders} />
+      )}
     </section>
   );
 }

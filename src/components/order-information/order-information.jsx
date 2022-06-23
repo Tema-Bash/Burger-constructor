@@ -2,7 +2,6 @@ import styles from "./order-information.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getIngredients } from "../../services/actions/ingredients";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import {
   wsConnectionClosed,
@@ -16,7 +15,7 @@ import {
 } from "../../utils/utils";
 import { getCookie } from "../../utils/utils";
 
-export default function OrderInformation({ secure = false }) {
+export default function OrderInformation({ secure }) {
   const dispatch = useDispatch();
   const params = useParams();
   const { wsRequested, wsConnected, orders } = useSelector(
@@ -45,8 +44,6 @@ export default function OrderInformation({ secure = false }) {
   }, [ingredientsInOrder]);
 
   useEffect(async () => {
-    await dispatch(getIngredients());
-
     if (orders.length > 0 && ingredientsInOrder.length === 0) {
       await setOrder(orders.find((el) => el.number === Number(params.id)));
       if (choosenOrder) {
@@ -64,6 +61,7 @@ export default function OrderInformation({ secure = false }) {
     }
   }, [orders, choosenOrder, params, ingredientsInOrder]);
 
+  //useEffect(() => () => dispatch(wsConnectionClosed()), [dispatch]);
   if (!choosenOrder) {
     return null;
   }

@@ -8,6 +8,8 @@ import {
 
 const initialState = {
   wsConnected: false,
+  wsRequested: false,
+  wsSecure: false,
   orders: [],
   total: undefined,
   totalToday: undefined,
@@ -18,18 +20,22 @@ export const wsReducer = (state = initialState, action) => {
     case WS_CONNECTION_START:
       return {
         ...state,
+        wsRequested: true,
         wsConnected: false,
+        wsSecure: action.payload?.token ? true : false,
       };
 
     case WS_CONNECTION_SUCCESS:
       return {
         ...state,
+        wsRequested: false,
         wsConnected: true,
       };
 
     case WS_CONNECTION_ERROR:
       return {
         ...state,
+        wsRequested: false,
         wsConnected: false,
       };
 
