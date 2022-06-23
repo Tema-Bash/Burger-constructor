@@ -34,11 +34,20 @@ function BurgerIngredients() {
     const topType = tabObj.reduce((p, c) => {
       return c.y < p.y ? c : p;
     });
-
     if (topType.type !== current) {
       setCurrent(topType.type);
     }
   };
+
+  function moveTO(target) {
+    if (target == `buns`) {
+      bunRef.current.scrollIntoView({ behavior: "smooth" });
+    } else if (target == `sauces`) {
+      sauceRef.current.scrollIntoView({ behavior: "smooth" });
+    } else {
+      mainRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }
 
   useEffect(() => {
     dispatch({
@@ -52,13 +61,31 @@ function BurgerIngredients() {
       <p className="text text_type_main-large mt-10">Соберите бургер</p>
 
       <div className={styles.tab + " mt-5"}>
-        <Tab value="buns" active={current === "buns"} onClick={setCurrent}>
+        <Tab
+          value="buns"
+          active={current === "buns"}
+          onClick={(e) => {
+            moveTO(e);
+          }}
+        >
           Булки
         </Tab>
-        <Tab value="sauces" active={current === "sauces"} onClick={setCurrent}>
+        <Tab
+          value="sauces"
+          active={current === "sauces"}
+          onClick={(e) => {
+            moveTO(e);
+          }}
+        >
           Соусы
         </Tab>
-        <Tab value="mains" active={current === "mains"} onClick={setCurrent}>
+        <Tab
+          value="mains"
+          active={current === "mains"}
+          onClick={(e) => {
+            moveTO(e);
+          }}
+        >
           Начинки
         </Tab>
       </div>
