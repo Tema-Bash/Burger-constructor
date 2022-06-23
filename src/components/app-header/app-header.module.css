@@ -35,6 +35,10 @@
   align-self: center;
 }
 
+.logo:hover {
+  cursor: pointer;
+}
+
 .constructor {
   grid-area: constructor;
 }

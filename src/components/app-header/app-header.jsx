@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   Logo,
   BurgerIcon,
@@ -9,6 +9,7 @@ import styles from "./app-header.module.css";
 
 function AppHeader() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   return (
     <header className={styles.AppHeader + " mt-10"}>
@@ -43,7 +44,7 @@ function AppHeader() {
               </p>
             </NavLink>
           </li>
-          <li className={styles.logo}>
+          <li className={styles.logo} onClick={() => navigate("/")}>
             <Logo />
           </li>
           <li className={styles.profile + " p-5 mt-4 mb-4"}>
