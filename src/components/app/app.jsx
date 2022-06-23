@@ -21,7 +21,6 @@ import OrderInformation from "../order-information/order-information";
 import { useEffect } from "react";
 import { getCookie } from "../../utils/utils";
 import { profileRequest } from "../../services/actions/authorization";
-import Preloader from "../../pages/preloader";
 
 export default function App() {
   const navigate = useNavigate();
@@ -126,7 +125,7 @@ export default function App() {
           path="/profile/orders/:id"
           element={
             <ProtectedRoute anonymous={false}>
-              <OrderPage />
+              <OrderPage secure={true} />
             </ProtectedRoute>
           }
         />

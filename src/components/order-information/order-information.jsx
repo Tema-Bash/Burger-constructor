@@ -19,7 +19,6 @@ import { getCookie } from "../../utils/utils";
 export default function OrderInformation({ secure = false }) {
   const dispatch = useDispatch();
   const params = useParams();
-
   const { wsRequested, wsConnected, orders } = useSelector(
     (store) => store.webSocket
   );
