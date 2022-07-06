@@ -1,8 +1,8 @@
 import { URL, tokenlifeTime } from "../utils/consts";
 import { checkResponse, setCookie } from "../utils/utils";
 
-export const getUser = (accessTokenValue) => {
-  return fetchWithRefresh(`${URL}/auth/user`, {
+export const getUser = async (accessTokenValue) => {
+  return await fetchWithRefresh(`${URL}/auth/user`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${accessTokenValue}`,
@@ -82,29 +82,32 @@ export const resetPass = (token, password) => {
   }).then(checkResponse);
 };
 
-export const refreshToken = (refreshTokenValue) => {
-  return fetch(`${URL}/auth/token`, {
+export const refreshToken = async (refreshTokenValue) => {
+  return await fetch(`${URL}/auth/token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      token: refreshTokenValue,
+      token: `${refreshTokenValue}`,
+    }),
+  })
+    .then(checkResponse)
+    .then((refreshData) => {
+      if (!refreshData.success) {
+        return Promise.reject(refreshData);
+      }
+      setCookie(
+        "accessToken",
+        refreshData.accessToken.split("Bearer ")[1],
+        tokenlifeTime
+      );
+      localStorage.setItem("refreshToken", refreshData.refreshToken);
+      return refreshData;
     })
-      .then(checkResponse)
-      .then((refreshData) => {
-        if (!refreshData.success) {
-          return Promise.reject(refreshData);
-        }
-        setCookie(
-          "accessToken",
-          refreshData.accessToken.split("Bearer ")[1],
-          tokenlifeTime
-        );
-        localStorage.setItem("refreshToken", refreshData.refreshToken);
-        return refreshData;
-      }),
-  });
+    .catch((res) => {
+      console.log(res);
+    });
 };
 
 const fetchWithRefresh = async (url, options) => {
@@ -112,9 +115,7 @@ const fetchWithRefresh = async (url, options) => {
     const res = await fetch(url, options);
     return await checkResponse(res);
   } catch (err) {
-    console.log(err);
-    if (err.message === "jwt expired") {
-      console.log(`token update`);
+    if (err.status === 403) {
       const refreshData = await refreshToken(
         localStorage.getItem("refreshToken")
       );

@@ -10,10 +10,8 @@ import { Navigate } from "react-router-dom";
 import { resetPass } from "../services/api";
 
 export function ResetPasswordPage({ visitForgotPass }) {
-  // Состояние, в котором содержится значения полей ввода
   const [form, setValue] = useState({ token: "", password: "" });
 
-  // Обработчик изменения полей ввода обновляет состояние
   const handleChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
@@ -29,7 +27,7 @@ export function ResetPasswordPage({ visitForgotPass }) {
           }
         })
         .catch((res) => {
-          alert(res);
+          console.log(res);
         });
     },
     [form]

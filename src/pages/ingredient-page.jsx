@@ -2,18 +2,12 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./ingredient-page.module.css";
 import { useParams, useNavigate } from "react-router-dom";
-import { getIngredients } from "../services/actions/ingredients";
 
 export const IngredientPage = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { ingredients } = useSelector((store) => store.ingredients);
   const [ingredient, setIngredient] = useState(1);
   const params = useParams();
-
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
 
   useEffect(() => {
     if (ingredients.length > 0) {
@@ -24,7 +18,7 @@ export const IngredientPage = () => {
         navigate("/not-found");
       }
     }
-  }, [ingredients, params]);
+  }, [ingredients, params, navigate]);
 
   return (
     <div className={`${styles.ingredientDetails} pb-15 pt-30`}>

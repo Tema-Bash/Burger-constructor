@@ -7,7 +7,6 @@ import ModalOverlay from "../modal-overlay/modal-overlay";
 
 const modalsContainer = document.querySelector("#modals");
 export default function Modal({ title, onClose, children }) {
-  // Обработка нажатия Esc
   const handleEscKeydown = (e) => {
     e.key === "Escape" && onClose();
   };
@@ -35,7 +34,6 @@ export default function Modal({ title, onClose, children }) {
 }
 
 Modal.propTypes = {
-  title: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
 };

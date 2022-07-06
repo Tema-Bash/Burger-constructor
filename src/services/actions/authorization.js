@@ -23,6 +23,8 @@ export const SAVE_PROFILE_REQUEST = "SAVE_PROFILE_REQUEST";
 export const SAVE_PROFILE_SUCCESS = "SAVE_PROFILE_SUCCESS";
 export const SAVE_PROFILE_FAILED = "SAVE_PROFILE_FAILED";
 
+export const AUTH_CHECKED = "AUTH_CHECKED";
+
 export const profileRequest = (accessTokenValue) => {
   return async (dispatch) => {
     dispatch({
@@ -43,10 +45,12 @@ export const profileRequest = (accessTokenValue) => {
         }
       })
       .catch((error) => {
-        console.log(error);
         dispatch({
           type: PROFILE_FAILED,
         });
+      })
+      .finally(() => {
+        dispatch({ type: AUTH_CHECKED });
       });
   };
 };
@@ -108,7 +112,7 @@ export const authorization = (email, password) => {
         dispatch({
           type: LOGIN_FAILED,
         });
-        alert(error);
+        console.log(error);
       });
   };
 };
@@ -118,7 +122,6 @@ export const registerRequest = (name, email, password) => {
     dispatch({
       type: REGISTER_REQUEST,
     });
-
     register(name, email, password)
       .then((res) => {
         if (res && res.success) {
@@ -140,7 +143,7 @@ export const registerRequest = (name, email, password) => {
       })
       .catch((error) => {
         dispatch({ type: REGISTER_FAILED, error: error });
-        alert(error);
+        console.log(error);
       });
   };
 };
@@ -150,7 +153,6 @@ export const exitRequest = (refreshTokenValue) => {
     await dispatch({
       type: EXIT_REQUEST,
     });
-
     await logout(refreshTokenValue)
       .then((res) => {
         if (res && res.success) {
@@ -159,8 +161,10 @@ export const exitRequest = (refreshTokenValue) => {
             user: {},
           });
           deleteCookie("accessToken");
+          deleteCookie("accessToken");
           localStorage.removeItem("refreshToken");
         } else {
+          console.log(`exit with error`);
           dispatch({
             type: EXIT_FAILED,
           });
@@ -171,7 +175,7 @@ export const exitRequest = (refreshTokenValue) => {
         dispatch({
           type: EXIT_FAILED,
         });
-        alert(error);
+        console.log(error);
       });
   };
 };
