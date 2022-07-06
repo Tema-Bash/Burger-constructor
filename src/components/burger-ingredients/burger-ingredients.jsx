@@ -39,7 +39,7 @@ function BurgerIngredients() {
     }
   };
 
-  function moveTO(target) {
+  function scrollTo(target) {
     if (target == `buns`) {
       bunRef.current.scrollIntoView({ behavior: "smooth" });
     } else if (target == `sauces`) {
@@ -65,7 +65,7 @@ function BurgerIngredients() {
           value="buns"
           active={current === "buns"}
           onClick={(e) => {
-            moveTO(e);
+            scrollTo(e);
           }}
         >
           Булки
@@ -74,7 +74,7 @@ function BurgerIngredients() {
           value="sauces"
           active={current === "sauces"}
           onClick={(e) => {
-            moveTO(e);
+            scrollTo(e);
           }}
         >
           Соусы
@@ -83,7 +83,7 @@ function BurgerIngredients() {
           value="mains"
           active={current === "mains"}
           onClick={(e) => {
-            moveTO(e);
+            scrollTo(e);
           }}
         >
           Начинки
