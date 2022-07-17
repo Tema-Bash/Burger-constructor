@@ -18,14 +18,15 @@ export function ProtectedRoute({
 }: TProtectedRouteProps) {
   const { user } = useSelector((store) => store.auth);
   const { isAuthChecked } = useSelector((store) => store.auth);
-  const isAuth = Object.keys(user).length !== 0;
   const location = useLocation();
   const LocationState = location.state as LocationState;
 
   if (!isAuthChecked) {
     return <Preloader text={""} />;
-  } else if (!anonymous && !isAuth) {
+  } else if (!anonymous && !user) {
     // Если требуется авторизация, а пользователь не авторизован...
+    console.log(`Navigate login`);
+
     return (
       <Navigate
         to="/login"
@@ -33,7 +34,7 @@ export function ProtectedRoute({
         state={{ from: location.pathname }}
       />
     );
-  } else if (anonymous && isAuth) {
+  } else if (anonymous && user) {
     // Если разрешен только неавторизованный доступ, а пользователь авторизован...
     return <Navigate to={LocationState?.from || "/"} replace={true} />;
   } else {

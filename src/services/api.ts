@@ -117,7 +117,6 @@ export const refreshToken = async (refreshTokenValue: string | null) => {
 };
 
 const fetchWithRefresh = async (url: string, options: any) => {
-  console.log(options);
   try {
     const res = await fetch(url, options);
     return await checkResponse(res);

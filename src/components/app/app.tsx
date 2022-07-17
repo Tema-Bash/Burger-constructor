@@ -32,11 +32,10 @@ export default function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.auth);
-  const isAuth = Object.keys(user).length !== 0;
 
   useEffect(() => {
     const checkUser = async () => {
-      if (!isAuth) {
+      if (!user) {
         const token = getCookie("accessToken");
         if (token) {
           await dispatch(profileRequest(token));

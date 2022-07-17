@@ -1,5 +1,5 @@
 import styles from "./change-profile-form.module.css";
-import { useState, useCallback, SyntheticEvent } from "react";
+import { useState, useCallback, SyntheticEvent, useEffect } from "react";
 import {
   Button,
   Input,
@@ -11,18 +11,35 @@ import {
   updateRequest,
 } from "../../services/actions/authorization";
 
+interface IFormState {
+  name: string;
+  login: string;
+  password: string;
+}
+
 function ProfileForm() {
   const { user } = useSelector((store) => store.auth);
-  // Состояние, в котором содержится значения полей ввода
-  const [form, setValue] = useState({
-    name: user?.name,
-    login: user?.email,
-    password: "",
-  });
   const dispatch = useDispatch();
 
-  //Правило для отображения кнопок "сохранить" и "отмена"
-  let rule = !(form.login == user.email) || !(form.name == user.name);
+  // Состояние, в котором содержится значения полей ввода
+  const [form, setValue] = useState<IFormState>({
+    name: "",
+    login: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    if (user) {
+      setValue({ ...form, name: user.name, login: user.email });
+    }
+  }, [user]);
+
+  const rule = () => {
+    if (!user) {
+      return;
+    }
+    return !(form.login == user.email) || !(form.name == user.name);
+  };
 
   // Обработчик изменения полей ввода обновляет состояние
   const handleChange = (e: SyntheticEvent) => {
@@ -33,7 +50,9 @@ function ProfileForm() {
   let cancelHandler = useCallback(async (e) => {
     e.preventDefault();
     dispatch(profileRequest(getCookie("accessToken")));
-    setValue({ ...form, name: user.name, login: user.email, password: "" });
+    if (user) {
+      setValue({ ...form, name: user.name, login: user.email, password: "" });
+    }
   }, []);
 
   let saveProfile = useCallback(
@@ -47,10 +66,17 @@ function ProfileForm() {
           form.password
         )
       );
-      setValue({ ...form, name: user.name, login: user.email });
+      if (user) {
+        setValue({ ...form, name: user.name, login: user.email });
+      }
     },
+
     [form]
   );
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <form onSubmit={saveProfile} className={`${styles.form} mt-30`}>
@@ -99,7 +125,7 @@ function ProfileForm() {
           size={"default"}
         />
       </div>
-      {rule && (
+      {rule() && (
         <div className={styles.buttons}>
           <Button onClick={cancelHandler} type="secondary" size="medium">
             Отмена

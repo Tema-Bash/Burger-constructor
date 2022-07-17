@@ -11,8 +11,9 @@ export const WS_SEND_MESSAGE: "WS_SEND_MESSAGE" = "WS_SEND_MESSAGE";
 
 export interface IWsConnectionStartAction {
   readonly type: typeof WS_CONNECTION_START;
-  readonly path: string;
-  readonly token?: string;
+  //readonly path: string;
+  //readonly token?: string;
+  readonly payload: { token?: string; wsUrl: string };
 }
 
 export interface IWsConnectionSuccessAction {

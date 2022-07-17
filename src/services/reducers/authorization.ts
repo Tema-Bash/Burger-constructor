@@ -12,6 +12,9 @@ import {
   PROFILE_SUCCESS,
   PROFILE_FAILED,
   AUTH_CHECKED,
+  SAVE_PROFILE_REQUEST,
+  SAVE_PROFILE_SUCCESS,
+  SAVE_PROFILE_FAILED,
   TAuthUserActions,
 } from "../actions/authorization";
 import { TUser } from "../types/data";
@@ -19,20 +22,25 @@ import { TUser } from "../types/data";
 type TinitialAuthState = {
   registerRequested: boolean;
   registerFailed: boolean;
+
   loginRequested: boolean;
   loginFailed: boolean;
+
   exitRequested: boolean;
   exitFailed: boolean;
+
   profileRequested: boolean;
   profileFailed: boolean;
 
+  saveProfileRequested: boolean;
+  saveProfileFailed: boolean;
+
   isAuthChecked: boolean;
 
-  user: TUser | {};
+  user?: TUser;
 };
 
 const initialAuth: TinitialAuthState = {
-  user: {},
   registerRequested: false,
   registerFailed: false,
   loginRequested: false,
@@ -41,6 +49,8 @@ const initialAuth: TinitialAuthState = {
   exitFailed: false,
   profileRequested: false,
   profileFailed: false,
+  saveProfileRequested: false,
+  saveProfileFailed: false,
 
   isAuthChecked: false,
 };
@@ -70,7 +80,7 @@ export function authReducer(state = initialAuth, action: TAuthUserActions) {
 
     case REGISTER_FAILED:
       return {
-        ...state,
+        ...initialAuth,
         registerFailed: true,
       };
 
@@ -91,7 +101,7 @@ export function authReducer(state = initialAuth, action: TAuthUserActions) {
 
     case LOGIN_FAILED:
       return {
-        ...state,
+        ...initialAuth,
         loginRequested: false,
         loginFailed: true,
       };
@@ -99,16 +109,15 @@ export function authReducer(state = initialAuth, action: TAuthUserActions) {
     case EXIT_REQUEST:
       return {
         ...state,
-        exitRequested: false,
+        exitRequested: true,
         exitFailed: true,
       };
 
     case EXIT_SUCCESS:
       return {
-        ...state,
+        ...initialAuth,
         exitRequested: false,
-        exitFailed: true,
-        user: {},
+        exitFailed: false,
       };
     case EXIT_FAILED:
       return {
@@ -136,6 +145,27 @@ export function authReducer(state = initialAuth, action: TAuthUserActions) {
         ...state,
         profileRequested: false,
         profileFailed: true,
+      };
+
+    case SAVE_PROFILE_REQUEST:
+      return {
+        ...state,
+        saveProfileRequested: true,
+        saveProfileFailed: false,
+      };
+
+    case SAVE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        saveProfileRequested: false,
+        user: action.user,
+      };
+
+    case SAVE_PROFILE_FAILED:
+      return {
+        ...state,
+        saveProfileRequested: false,
+        saveProfileFailed: true,
       };
 
     default:

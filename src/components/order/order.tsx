@@ -21,7 +21,7 @@ function Order({ order, orderOpenHandler }: TOrderProps) {
       setIngredientsInOrder(
         order.ingredients
           .map((item) => {
-            return ingredients.find((i: TIngredient) => i._id === item);
+            return ingredients.find((i: TIngredient) => i._id === item)!;
           })
           .reverse()
       );

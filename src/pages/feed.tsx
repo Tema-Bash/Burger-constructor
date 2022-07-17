@@ -7,7 +7,6 @@ import {
   wsConnectionClosed,
   wsConnectionStart,
 } from "../services/actions/web-socket";
-import { TOrder } from "../services/types/data";
 
 function FeedPage() {
   const dispatch = useDispatch();
@@ -36,10 +35,10 @@ function FeedPage() {
   }, [wsConnected, dispatch]);
 
   const doneNums = orders.filter(
-    (order: TOrder, idx: number) => idx < 10 && order.status === "done"
+    (order, idx) => idx < 10 && order.status === "done"
   );
   const pendingNums = orders.filter(
-    (order: TOrder, idx: number) => idx < 10 && order.status === "pending"
+    (order, idx) => idx < 10 && order.status === "pending"
   );
 
   if (!orders) {
@@ -53,7 +52,7 @@ function FeedPage() {
           Лента заказов
         </h1>
         <ul className={styles.feedItems}>
-          {orders.map((order: TOrder, index: number) => {
+          {orders.map((order, index) => {
             return (
               <Order
                 order={order}
@@ -70,7 +69,7 @@ function FeedPage() {
           <div className={`${styles.ready}`}>
             <p className="text text_type_main-medium pb-6">Готовы:</p>
             <ul className={`${styles.list}`}>
-              {doneNums.map((order: TOrder, index: number) => {
+              {doneNums.map((order, index) => {
                 return (
                   <li
                     key={index}
@@ -88,7 +87,7 @@ function FeedPage() {
               {pendingNums.length == 0 ? (
                 <p className={`text text_type_main-small`}>Заказов нет</p>
               ) : (
-                pendingNums.map((order: TOrder, index: number) => {
+                pendingNums.map((order, index) => {
                   return (
                     <li
                       key={index}

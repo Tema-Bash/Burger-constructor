@@ -41,7 +41,7 @@ export default function OrderInformation({ secure }: TOrderInformationProps) {
     Array<TIngredient>
   >([]);
   const [uniqIngredientsOrder, setuniqIngredientsOrder] =
-    useState<ReadonlyArray<TIngredient>>();
+    useState<Array<TIngredient>>();
 
   useEffect(() => {
     if (ingredientsInOrder.length !== 0) {
@@ -51,23 +51,24 @@ export default function OrderInformation({ secure }: TOrderInformationProps) {
 
   useEffect(() => {
     if (orders.length > 0 && ingredientsInOrder.length === 0) {
-      setOrder(orders.find((el: TOrder) => el.number === Number(params.id)));
+      setOrder(orders.find((el: TOrder) => el.number === Number(params.id))!);
       if (choosenOrder) {
         setIngredientsInOrder(
-          choosenOrder.ingredients &&
-            choosenOrder?.ingredients
-              .map((id, index) => {
-                return ingredients.find((item: TIngredient) => item._id == id);
-              })
-              .sort((a, b) => {
-                return a.type === "bun" ? -1 : a._id - b._id;
-              })
+          choosenOrder?.ingredients
+            .map((id) => {
+              return ingredients.find((item: TIngredient) => item._id == id)!;
+            })
+            .sort((a, b) => {
+              if (!a || !b) {
+                return 0;
+              }
+              return a.type === "bun" ? -1 : a._id.localeCompare(b._id);
+            })
         );
       }
     }
   }, [orders, choosenOrder, params, ingredientsInOrder]);
 
-  //useEffect(() => () => dispatch(wsConnectionClosed()), [dispatch]);
   if (!choosenOrder) {
     return null;
   }
