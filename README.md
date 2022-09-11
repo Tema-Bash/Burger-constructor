@@ -8,8 +8,10 @@ You can run project `npm run start`
 
 ## Стек
 
-Проект для отработки навыков работы с React, Redux, react-dnd библиотекой, а также работой с маршрутизацией в приложении с помощью react-route v6.
+Проект для работы с React, Redux, redux-thunk, react-dnd библиотекой, а также работой с маршрутизацией в приложении с помощью react-route v6.
+Написан на TypeScript
 В проекте используются:
+TypeScript
 React
 Redux-toolkit
 redux-dnd
