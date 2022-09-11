@@ -6,11 +6,11 @@
 ### Стек
 В проекте использованы:
 
-* React.js,
-* Redux-toolkit,
-* redux-dnd,
-* redux-thunk,
-* react-route.
+* React.js
+* Redux-toolkit
+* redux-dnd
+* redux-thunk
+* react-route
 
 ## Start
 Для запуска достаточно загрузить все зависимые библиотеки `npm i`, а затем запустить сам проект `npm run start`.
