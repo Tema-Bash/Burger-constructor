@@ -5,7 +5,7 @@ import Preloader from "../pages/preloader";
 
 type TProtectedRouteProps = {
   anonymous?: boolean;
-  children?: ReactNode; //комплексный тип, включающий множество элементов, которые может вернуть render() метод: type ReactNode = ReactChild | ReactFragment | ReactPortal | boolean | null | undefined;.
+  children?: ReactNode;
 };
 
 type LocationState = {
@@ -25,8 +25,6 @@ export function ProtectedRoute({
     return <Preloader text={""} />;
   } else if (!anonymous && !user) {
     // Если требуется авторизация, а пользователь не авторизован...
-    console.log(`Navigate login`);
-
     return (
       <Navigate
         to="/login"

@@ -15,7 +15,6 @@ interface IForgotPasswordPage {
 export function ForgotPasswordPage({
   setVisitForgotPass,
 }: IForgotPasswordPage) {
-  console.log(setVisitForgotPass);
   // Состояние, в котором содержится значения полей ввода
   const [form, setValue] = useState({ name: "", email: "", password: "" });
   // Обработчик изменения полей ввода обновляет состояние

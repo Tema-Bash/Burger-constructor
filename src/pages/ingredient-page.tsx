@@ -5,7 +5,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { TIngredient } from "../services/types/data";
 
 export const IngredientPage = () => {
-  console.log("IngredientPage");
   const navigate = useNavigate();
   const { ingredients } = useSelector((store) => store.ingredients);
   const [ingredient, setIngredient] = useState<TIngredient | null>(null);
