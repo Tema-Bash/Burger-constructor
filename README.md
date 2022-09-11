@@ -1,19 +1,19 @@
-# Burger shop on React
+# Burger shop on React.js
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Проект для отработки навыков работы с React, Redux, react-dnd библиотекой, а также работой с маршрутизацией с помощью react-route v6.
+Представляет из себя конструктор заказа, личный кабинет с лентой заказов, а также общая лента заказов доступная неавторизованным пользователям с модальными окнами.
+Присутствует авторизация по токену, соединение с сервером через web-socket.
+Написан на TypeScript
+### Стек
+В проекте использованы:
+* TypeScript
+* React.js
+* Redux-toolkit
+* redux-dnd
+* redux-thunk
+* react-route
 
 ## Start
 
-You can run project `npm run start`
+Для запуска достаточно загрузить все зависимые библиотеки `npm i --force`, а затем запустить сам проект `npm run start`.
 
-## Стек
-
-Проект для работы с React, Redux, redux-thunk, react-dnd библиотекой, а также работой с маршрутизацией в приложении с помощью react-route v6.
-Написан на TypeScript
-В проекте используются:
-TypeScript
-React
-Redux-toolkit
-redux-dnd
-redux-thunk
-react-route
