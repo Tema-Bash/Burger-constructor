@@ -16,4 +16,5 @@
 ## Start
 
 Для запуска достаточно загрузить все зависимые библиотеки `npm i --force`, а затем запустить сам проект `npm run start`.
-[Посмотреть проект можно тут](https://tema-bash.github.io/)
+
+[Посмотреть проект можно тут](https://tema-bash.github.io/Burger-constructor/)
